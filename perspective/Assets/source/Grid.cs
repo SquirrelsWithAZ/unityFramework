@@ -63,9 +63,9 @@ public class Grid : MonoBehaviour
 					{
 						tileInstance.tag = linkage;
 					}
-					catch(Exception e)
+					catch
 					{
-						Debug.LogError("Attempted to apply a non-existant tag. either check the JSON object or add this tag to inspector: " + linkage );
+						Debug.LogError("Attempted to apply a non-existant tag. either check the JSON object or add this tag to inspector: " + linkage);
 					}
 
 					this.tiles[i,j] = tileInstance;

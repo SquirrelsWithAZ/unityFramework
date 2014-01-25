@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class Grid : MonoBehaviour, IGrid
+public class Grid : MonoBehaviour
 {
 	public string levelDefinition;
 
@@ -18,7 +18,7 @@ public class Grid : MonoBehaviour, IGrid
 		this.tileCountI = jsonNode["tileCountI"].AsInt;
 		this.tileCountJ = jsonNode["tileCountJ"].AsInt;
 		this.tileWidth = jsonNode["tileWidth"].AsInt;
-		this.tileHeight = jsonNode["tileWidth"].AsInt;
+		this.tileHeight = jsonNode["tileHeight"].AsInt;
 
 		this.tiles = new GameObject[this.tileCountI, this.tileCountJ];
 

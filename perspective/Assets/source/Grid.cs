@@ -79,7 +79,22 @@ public class Grid : MonoBehaviour
 		}
 
     Vector3Extensions.gridRef = this;
+
+    SetupCamera();
 	}
+
+  /// <summary>
+  /// Sets camera position and orthographic size to encompass board
+  /// </summary>
+  private void SetupCamera()
+  {
+    float fullWidth = tileCountI * tileWidth;
+    float fullHeight = tileCountJ * tileHeight;
+    Camera.main.transform.position = new Vector3(fullWidth * .5f, 10f, fullHeight * .5f) - new Vector3(tileWidth * .5f, 0f, tileHeight * .5f);
+    Camera.main.orthographicSize = Mathf.Max(fullWidth, fullHeight) * .5f;
+    if (Camera.main.aspect < 1f)
+      Camera.main.orthographicSize /= Camera.main.aspect;
+  }
 
 	void Update() 
 	{

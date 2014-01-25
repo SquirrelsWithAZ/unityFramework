@@ -1,8 +1,9 @@
 *.csproj
-*.pidb
+*.pidb.*
 *.sln
 *.userprefs
 *.swp
+*.pidb
 Library
 Temp
 Library

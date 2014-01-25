@@ -21,3 +21,14 @@ public class Tile : MonoBehaviour
     }
   }
 }
+
+public struct TilePos
+{
+  public TilePos(int xCoord, int yCoord)
+  {
+    x = xCoord;
+    y = yCoord;
+  }
+  public int x;
+  public int y;
+}

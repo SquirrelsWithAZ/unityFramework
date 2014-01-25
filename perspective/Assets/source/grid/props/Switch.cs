@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spawn : Prop
+public class Switch : Prop 
 {
-	public string player;
+	public double cooldown;
 }

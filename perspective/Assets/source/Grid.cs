@@ -1,10 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using SimpleJSON;
+using System;
 
 public class Grid : MonoBehaviour
 {
 	public string levelDefinition;
+
+	/* levelDefinition
+	{
+	    "tileCountI" : 2,
+	    "tileCountJ" : 2,
+	    "tileWidth" : 3,
+	    "tileHeight" : 3,
+
+	    "layout" : [
+	        {"prefab" : "Tile_Type_A"},
+	        {"prefab" : "Tile_Type_A"},
+	        {"prefab" : "Tile_Type_A"},
+	        {"prefab" : "Tile_Type_B"}
+	    ]
+	}
+	*/
 
 	private int tileCountI;
 	private int tileCountJ;
@@ -28,6 +45,7 @@ public class Grid : MonoBehaviour
 			for(int j = 0; j < this.tileCountJ; j++)
 			{
 				string linkage = layoutJsonNodes[j*this.tileCountI+i]["prefab"];
+				
 
 				GameObject tileInstance = Instantiate(Resources.Load(linkage)) as GameObject;
 				Tile tile = tileInstance.GetComponent<Tile>();
@@ -39,6 +57,16 @@ public class Grid : MonoBehaviour
 					tileInstance.transform.localScale = new Vector4(this.tileWidth, 1, this.tileHeight, 0);
 					tileInstance.transform.position = new Vector4(i * this.tileWidth, 0, j * this.tileHeight, 1);
 					tileInstance.transform.parent = this.transform;
+
+					//tag each tile with the type based on JSON parameter
+					try
+					{
+						tileInstance.tag = linkage;
+					}
+					catch(Exception e)
+					{
+						Debug.LogError("Attempted to apply a non-existant tag. either check the JSON object or add this tag to inspector: " + linkage );
+					}
 
 					this.tiles[i,j] = tileInstance;
 				}

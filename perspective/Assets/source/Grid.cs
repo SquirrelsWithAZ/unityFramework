@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SimpleJSON;
 using System;
+using CustomExtensions;
 
 public class Grid : MonoBehaviour
 {
@@ -63,9 +64,9 @@ public class Grid : MonoBehaviour
 					{
 						tileInstance.tag = linkage;
 					}
-					catch(Exception e)
+					catch
 					{
-						Debug.LogError("Attempted to apply a non-existant tag. either check the JSON object or add this tag to inspector: " + linkage );
+						Debug.LogError("Attempted to apply a non-existant tag. either check the JSON object or add this tag to inspector: " + linkage);
 					}
 
 					this.tiles[i,j] = tileInstance;
@@ -76,37 +77,67 @@ public class Grid : MonoBehaviour
 				}
 			}
 		}
-	}
 
-	void Update() 
-	{
-		
-	}
+    Vector3Extensions.gridRef = this;
 
-	public int getTileCountI()
-	{
-		return this.tileCountI;
-	}
+    SetupCamera();
+  }
 
-	public int getTileCountJ()
-	{
-		return this.tileCountJ;
-	}
+  /// <summary>
+  /// Sets camera position and orthographic size to encompass board
+  /// </summary>
+  private void SetupCamera()
+  {
+    float fullWidth = tileCountI * tileWidth;
+    float fullHeight = tileCountJ * tileHeight;
+    Camera.main.transform.position = new Vector3(fullWidth * .5f, 10f, fullHeight * .5f) - new Vector3(tileWidth * .5f, 0f, tileHeight * .5f);
+    Camera.main.orthographicSize = Mathf.Max(fullWidth, fullHeight) * .5f;
+    if (Camera.main.aspect < 1f)
+      Camera.main.orthographicSize /= Camera.main.aspect;
+  }
 
-	public int getWidth()
-	{
-		return this.tileCountI * this.tileWidth;
-	}
+  void Update()
+  {
 
-	public int getHeight()
-	{
-		return this.tileCountJ * this.tileHeight;
-	}
+  }
 
-	public Tile getTile(int i, int j)
-	{
-		return this.tiles[i, j].GetComponent<Tile>();
-	}
+  public int getTileCountI()
+  {
+    return this.tileCountI;
+  }
+
+  public int getTileCountJ()
+  {
+    return this.tileCountJ;
+  }
+
+  public int getWidth()
+  {
+    return this.tileCountI * this.tileWidth;
+  }
+
+  public int getHeight()
+  {
+    return this.tileCountJ * this.tileHeight;
+  }
+
+  public int getTileWidth()
+  {
+    return this.tileWidth;
+  }
+
+  public int getTileHeight()
+  {
+    return this.tileHeight;
+  }
+
+  public Tile getTile(int i, int j)
+  {
+    if (i >= tileCountI || i < 0 || j >= tileCountJ || j < 0)
+      return null;
+    else
+      return this.tiles[i, j].GetComponent<Tile>();
+  }
 }
 
 public enum TileTypes
@@ -114,4 +145,47 @@ public enum TileTypes
   TypeA,
   TypeB,
   Neutral
+}
+
+public struct TilePos
+{
+  public TilePos(int xCoord, int yCoord)
+  {
+    x = xCoord;
+    y = yCoord;
+  }
+  public int x;
+  public int y;
+}
+
+namespace CustomExtensions
+{
+  public static class Vector3Extensions
+  {
+    public static Grid gridRef;
+
+    public static TilePos GetTilePos(this Vector3 vec3)
+    {
+      Vector2 precisePos = vec3.GetTilePosPrecise();
+
+      TilePos roundedPos = new TilePos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
+      return roundedPos;
+    }
+
+    public static Vector2 GetTilePosPrecise(this Vector3 vec3)
+    {
+      float xFloat = (vec3.x / (float)gridRef.getTileWidth());
+      float yFloat = (vec3.z / (float)gridRef.getTileHeight());
+
+      return new Vector2(xFloat, yFloat);
+    }
+
+    public static Vector2 GetTilePosOffset(this Vector3 vec3)
+    {
+      Vector2 precisePos = vec3.GetTilePosPrecise();
+      Vector2 roundedPos = new Vector2(Mathf.Round(precisePos.x), Mathf.Round(precisePos.y));
+      Vector2 offsetPos = new Vector2(precisePos.x - roundedPos.x, precisePos.y - roundedPos.y);
+      return offsetPos;
+    }
+  }
 }

@@ -21,28 +21,3 @@ public class Tile : MonoBehaviour
     }
   }
 }
-
-public struct TilePos
-{
-  public TilePos(int xCoord, int yCoord)
-  {
-    x = xCoord;
-    y = yCoord;
-  }
-  public int x;
-  public int y;
-}
-
-namespace CustomExtensions
-{
-  public static class Vector3Extensions
-  {
-    public static TilePos GetTilePos(this Vector3 vec3)
-    {
-      float xFloat = vec3.x;
-      float yFloat = vec3.z;
-
-      return new TilePos(Mathf.RoundToInt(xFloat), Mathf.RoundToInt(yFloat));
-    }
-  }
-}

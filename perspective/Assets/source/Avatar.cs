@@ -43,6 +43,7 @@ public class Avatar : MonoBehaviour
     int verticalMovement = 0;
     int horizontalMovement = 0;
 
+    Debug.Log("Checking input on player " + playerNumber);
     if (_inputManager.CheckInput(InputActions.Up).isActive)
       verticalMovement += 1;
     else if (_inputManager.CheckInput(InputActions.Down).isActive)
@@ -52,6 +53,8 @@ public class Avatar : MonoBehaviour
       horizontalMovement += 1;
     else if (_inputManager.CheckInput(InputActions.Left).isActive)
       horizontalMovement -= 1;
+
+    transform.position += new Vector3(horizontalMovement, 0f, verticalMovement).normalized * movementSpeed;
   }
 
   private void ChangeOccupiedTile(Tile currTile)

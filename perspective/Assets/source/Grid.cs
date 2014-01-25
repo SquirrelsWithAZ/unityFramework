@@ -81,7 +81,7 @@ public class Grid : MonoBehaviour
     Vector3Extensions.gridRef = this;
 
     SetupCamera();
-	}
+  }
 
   /// <summary>
   /// Sets camera position and orthographic size to encompass board
@@ -96,35 +96,48 @@ public class Grid : MonoBehaviour
       Camera.main.orthographicSize /= Camera.main.aspect;
   }
 
-	void Update() 
-	{
-		
-	}
+  void Update()
+  {
 
-	public int getTileCountI()
-	{
-		return this.tileCountI;
-	}
+  }
 
-	public int getTileCountJ()
-	{
-		return this.tileCountJ;
-	}
+  public int getTileCountI()
+  {
+    return this.tileCountI;
+  }
 
-	public int getWidth()
-	{
-		return this.tileCountI * this.tileWidth;
-	}
+  public int getTileCountJ()
+  {
+    return this.tileCountJ;
+  }
 
-	public int getHeight()
-	{
-		return this.tileCountJ * this.tileHeight;
-	}
+  public int getWidth()
+  {
+    return this.tileCountI * this.tileWidth;
+  }
 
-	public Tile getTile(int i, int j)
-	{
-		return this.tiles[i, j].GetComponent<Tile>();
-	}
+  public int getHeight()
+  {
+    return this.tileCountJ * this.tileHeight;
+  }
+
+  public int getTileWidth()
+  {
+    return this.tileWidth;
+  }
+
+  public int getTileHeight()
+  {
+    return this.tileHeight;
+  }
+
+  public Tile getTile(int i, int j)
+  {
+    if (i >= tileCountI || i < 0 || j >= tileCountJ || j < 0)
+      return null;
+    else
+      return this.tiles[i, j].GetComponent<Tile>();
+  }
 }
 
 public enum TileTypes
@@ -153,13 +166,26 @@ namespace CustomExtensions
 
     public static TilePos GetTilePos(this Vector3 vec3)
     {
-      float xFloat = vec3.x / (float)gridRef.getWidth();
-      float yFloat = vec3.z / (float)gridRef.getHeight();
+      Vector2 precisePos = vec3.GetTilePosPrecise();
 
-      //Debug.Log("Getting tile coordinate for position " + xFloat + ", " + yFloat);
-      TilePos newPos = new TilePos(Mathf.RoundToInt(xFloat + .25f), Mathf.RoundToInt(yFloat + .25f));
-      //Debug.Log("Adjusted tile pos is (" + newPos.x + ", " + newPos.y + ")");
-      return newPos;
+      TilePos roundedPos = new TilePos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
+      return roundedPos;
+    }
+
+    public static Vector2 GetTilePosPrecise(this Vector3 vec3)
+    {
+      float xFloat = (vec3.x / (float)gridRef.getTileWidth());
+      float yFloat = (vec3.z / (float)gridRef.getTileHeight());
+
+      return new Vector2(xFloat, yFloat);
+    }
+
+    public static Vector2 GetTilePosOffset(this Vector3 vec3)
+    {
+      Vector2 precisePos = vec3.GetTilePosPrecise();
+      Vector2 roundedPos = new Vector2(Mathf.Round(precisePos.x), Mathf.Round(precisePos.y));
+      Vector2 offsetPos = new Vector2(precisePos.x - roundedPos.x, precisePos.y - roundedPos.y);
+      return offsetPos;
     }
   }
 }

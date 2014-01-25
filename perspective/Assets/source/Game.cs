@@ -1,13 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Game : MonoBehaviour 
+public class Game : MonoBehaviour
 {
-	public Grid grid;
+  public Grid grid;
   public InputManager inputManager;
 
-  public void Start()
+  public void Awake()
   {
+    _instanceRef = this;
     inputManager.PushInputSpaceForAllPlayers(InputSpaces.GameSpace);
+  }
+
+  private static Game _instanceRef;
+  public static Game instance
+  {
+    get
+    {
+      return _instanceRef;
+    }
   }
 }

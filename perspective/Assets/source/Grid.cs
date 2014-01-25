@@ -108,3 +108,10 @@ public class Grid : MonoBehaviour
 		return this.tiles[i, j].GetComponent<Tile>();
 	}
 }
+
+public enum TileTypes
+{
+  TypeA,
+  TypeB,
+  Neutral
+}

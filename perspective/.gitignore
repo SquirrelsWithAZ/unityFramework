@@ -4,6 +4,7 @@
 *.userprefs
 *.swp
 *.pidb
+*.suo
 Library
 Temp
 Library

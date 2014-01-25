@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SimpleJSON;
 using System;
+using CustomExtensions;
 
 public class Grid : MonoBehaviour
 {
@@ -76,7 +77,24 @@ public class Grid : MonoBehaviour
 				}
 			}
 		}
+
+    Vector3Extensions.gridRef = this;
+
+    SetupCamera();
 	}
+
+  /// <summary>
+  /// Sets camera position and orthographic size to encompass board
+  /// </summary>
+  private void SetupCamera()
+  {
+    float fullWidth = tileCountI * tileWidth;
+    float fullHeight = tileCountJ * tileHeight;
+    Camera.main.transform.position = new Vector3(fullWidth * .5f, 10f, fullHeight * .5f) - new Vector3(tileWidth * .5f, 0f, tileHeight * .5f);
+    Camera.main.orthographicSize = Mathf.Max(fullWidth, fullHeight) * .5f;
+    if (Camera.main.aspect < 1f)
+      Camera.main.orthographicSize /= Camera.main.aspect;
+  }
 
 	void Update() 
 	{
@@ -107,4 +125,41 @@ public class Grid : MonoBehaviour
 	{
 		return this.tiles[i, j].GetComponent<Tile>();
 	}
+}
+
+public enum TileTypes
+{
+  TypeA,
+  TypeB,
+  Neutral
+}
+
+public struct TilePos
+{
+  public TilePos(int xCoord, int yCoord)
+  {
+    x = xCoord;
+    y = yCoord;
+  }
+  public int x;
+  public int y;
+}
+
+namespace CustomExtensions
+{
+  public static class Vector3Extensions
+  {
+    public static Grid gridRef;
+
+    public static TilePos GetTilePos(this Vector3 vec3)
+    {
+      float xFloat = vec3.x / (float)gridRef.getWidth();
+      float yFloat = vec3.z / (float)gridRef.getHeight();
+
+      //Debug.Log("Getting tile coordinate for position " + xFloat + ", " + yFloat);
+      TilePos newPos = new TilePos(Mathf.RoundToInt(xFloat + .25f), Mathf.RoundToInt(yFloat + .25f));
+      //Debug.Log("Adjusted tile pos is (" + newPos.x + ", " + newPos.y + ")");
+      return newPos;
+    }
+  }
 }

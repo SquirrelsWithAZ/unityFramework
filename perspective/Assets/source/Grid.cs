@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SimpleJSON;
 using System;
+using CustomExtensions;
 
 public class Grid : MonoBehaviour
 {
@@ -76,6 +77,8 @@ public class Grid : MonoBehaviour
 				}
 			}
 		}
+
+    Vector3Extensions.gridRef = this;
 	}
 
 	void Update() 
@@ -114,4 +117,34 @@ public enum TileTypes
   TypeA,
   TypeB,
   Neutral
+}
+
+public struct TilePos
+{
+  public TilePos(int xCoord, int yCoord)
+  {
+    x = xCoord;
+    y = yCoord;
+  }
+  public int x;
+  public int y;
+}
+
+namespace CustomExtensions
+{
+  public static class Vector3Extensions
+  {
+    public static Grid gridRef;
+
+    public static TilePos GetTilePos(this Vector3 vec3)
+    {
+      float xFloat = vec3.x / (float)gridRef.getWidth();
+      float yFloat = vec3.z / (float)gridRef.getHeight();
+
+      //Debug.Log("Getting tile coordinate for position " + xFloat + ", " + yFloat);
+      TilePos newPos = new TilePos(Mathf.RoundToInt(xFloat + .25f), Mathf.RoundToInt(yFloat + .25f));
+      //Debug.Log("Adjusted tile pos is (" + newPos.x + ", " + newPos.y + ")");
+      return newPos;
+    }
+  }
 }

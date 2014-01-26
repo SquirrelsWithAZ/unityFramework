@@ -838,7 +838,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032258186}
-  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
+  m_LocalRotation: {x: .642787635, y: 0, z: 0, w: .766044497}
   m_LocalPosition: {x: 1.09521127, y: 8.13903809, z: 1.75270486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -857,8 +857,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 2032258190}
   gravity: 5
-  inverseLookAt: {x: 0, y: 1, z: 0}
-  yScale: 2
+  cameraOffset: {x: 0, y: 0, z: -.5}
+  yScale: 1.5
+  minY: 30
   currentAreaOfInterest:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -900,7 +901,7 @@ Light:
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.9000001
+  m_Intensity: 2.33999991
   m_Range: 76.6953583
   m_SpotAngle: 30
   m_CookieSize: 10

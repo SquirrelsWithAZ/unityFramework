@@ -5,8 +5,9 @@ public class OurCamera : MonoBehaviour {
 
     public Camera camera;
     public float gravity;
-    public Vector3 inverseLookAt;
+    public Vector3 cameraOffset;
     public float yScale;
+    public float minY;
 
     public Bounds currentAreaOfInterest;
     public Vector3 idealPosition;
@@ -68,13 +69,19 @@ public class OurCamera : MonoBehaviour {
 
         // Calculate our idealized position
         idealPosition = new Vector3(currentAreaOfInterest.center.x, 0, currentAreaOfInterest.center.z);
-        idealPosition += inverseLookAt.normalized * yScale * CalculateCameraZoomFromBounds(currentAreaOfInterest, camera);
+        idealPosition += Vector3.up * yScale * CalculateCameraZoomFromBounds(currentAreaOfInterest, camera);
+
+        if (idealPosition.y < minY) idealPosition.y = minY;
 
         // Move towards our idealized position
         Vector3 d = idealPosition - camera.transform.position;
-        d *= gravity * Time.deltaTime;
+        if (d.magnitude > 0.0001f)
+        {
+            d *= gravity * Time.deltaTime;
 
-        camera.transform.position += d;
+            camera.transform.position += d;
+            camera.transform.position += cameraOffset;
+        }
     }
 
     public static Collider FindCollider(GameObject g)

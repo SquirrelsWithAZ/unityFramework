@@ -89,19 +89,20 @@ public class CubeAnimation : MonoBehaviour {
     //fires when leaving or hitting the top
     void animationEventTop()
     {
-    	Debug.Log("block at top");
+    	//Debug.Log("block at top");
     }
 
 	//fires when leaving or hitting the bottom
     void animationEventBottom()
     {
-    	Debug.Log("block at bottom");
+    	//Debug.Log("block at bottom");
     }
 
     //gets called from the animation to change blocks
     void changeState()
     {
-    	Debug.Log("trying to change game state");
+    	//Debug.Log("trying to change game state");
+    	
     	//DEBUG: Change this once swapTileVisuals() supports the param
 		//Game.instance.grid.swapTileVisuals(fadeScalar);
 		int i = this.transform.parent.GetComponent<Tile>().i;
@@ -116,7 +117,7 @@ public class CubeAnimation : MonoBehaviour {
 
 		initialized = true;
 
-		//this.transform.parent.gameObject.audio.Play();
+		this.transform.gameObject.audio.Play();
     }
 
 

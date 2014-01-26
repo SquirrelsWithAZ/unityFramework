@@ -20,6 +20,7 @@ public class Switch : Prop
     if (_cooldownCounter == 0)
     {
 
+
       //Game.instance.grid.swapTileState();
       moveSphereCollider();
       Game.instance.grid.swapTileState();

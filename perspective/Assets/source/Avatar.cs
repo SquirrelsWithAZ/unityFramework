@@ -169,7 +169,7 @@ public class Avatar : MonoBehaviour
                 //if (TileWalkable(connectionTile))
                 if (Mathf.Abs(localTileOffset.y) > smoothAroundCornerThreshold && TileWalkable(connectionTile))
                 {
-                  Debug.Log("Smoothing " + (localTileOffset.y > 0 ? "up" : "down"));
+                  //Debug.Log("Smoothing " + (localTileOffset.y > 0 ? "up" : "down"));
                   // Set velocity in direction of offset
                   _targetVelocity = _currentVelocity;
                   _velocityDir = VelocityDir.Vertical;

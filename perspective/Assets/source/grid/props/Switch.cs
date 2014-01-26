@@ -12,6 +12,7 @@ public class Switch : Prop
     if (_cooldownCounter == 0)
     {
       Game.instance.grid.swapTileState();
+      Game.instance.grid.swapTileVisuals();
       _cooldownCounter = cooldown;
     }
   }

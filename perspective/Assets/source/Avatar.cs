@@ -97,6 +97,7 @@ public class Avatar : MonoBehaviour
             if (TileWalkable(tileAhead))
             {
               _velocityDir = VelocityDir.Vertical;
+              Debug.Log("Changing course to " + _velocityDir + " with remainder velocity of " + velocityRemainder);
               _targetVelocity = _currentVelocity;
               _currentVelocity = desiredVelocity.normalized;
               MoveByVelocity(desiredVelocity.normalized * velocityRemainder, false);
@@ -121,13 +122,19 @@ public class Avatar : MonoBehaviour
             }
           }
         }
+        else
+        {
+          SetPosition(movedPos);
+        }
       }
       // If not, just move
       else
       {
         Tile tileAhead = Game.instance.grid.getTile(pivotTile.i, pivotTile.j);
         if (TileWalkable(tileAhead))
+        {
           SetPosition(movedPos);
+        }
       }
     }
     // current velocity is vertical
@@ -183,6 +190,7 @@ public class Avatar : MonoBehaviour
             {
               _velocityDir = VelocityDir.Horizontal;
               _targetVelocity = _currentVelocity;
+              Debug.Log("Changing course to " + _velocityDir + " with remainder velocity of " + velocityRemainder);
               _currentVelocity = desiredVelocity.normalized;
               MoveByVelocity(desiredVelocity.normalized * velocityRemainder, false);
             }
@@ -193,10 +201,6 @@ public class Avatar : MonoBehaviour
               if (TileWalkable(tileAhead) && (localTileOffset.x == 0 || TileWalkable(otherTileAhead)))
               {
                 SetPosition(movedPos);
-              }
-              else
-              {
-                //Debug.Log("Continued movement of type " + )
               }
             }
           }

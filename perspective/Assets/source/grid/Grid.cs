@@ -61,6 +61,27 @@ public class Grid : MonoBehaviour
           tileInstance.transform.parent = this.transform;
 
           this.tiles[i, j] = tileInstance;
+
+			Mesh mesh = tileInstance.transform.FindChild ("AnimationWrap").FindChild("Model").GetComponent<MeshFilter>().mesh;
+
+			Vector2[] uvs = new Vector2[24];
+			for(int v = 0; v < 24; v++)
+			{
+				uvs[v] = new Vector2();
+			}
+
+			Vector2 v0 = new Vector2(((float)i+1)/(float)this.tileCountI, ((float)j+1)/(float)this.tileCountJ); // .5, .5
+			Vector2 v1 = new Vector2((float)i/(float)this.tileCountI, (float)(j+1)/(float)this.tileCountJ); // -.5, .5
+			Vector2 v2 = new Vector2(((float)i+1)/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // .5, -5
+			Vector2 v3 = new Vector2((float)i/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // -.5, -.5
+
+
+			uvs[8] = v0;
+			uvs[9] = v1;
+			uvs[4] = v2;
+			uvs[5] = v3;
+
+			mesh.uv = uvs;
         }
         else
         {

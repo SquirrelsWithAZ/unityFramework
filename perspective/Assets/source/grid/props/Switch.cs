@@ -23,8 +23,8 @@ public class Switch : Prop
 
       //Game.instance.grid.swapTileState();
       moveSphereCollider();
-      Game.instance.grid.swapTileState();
-      Game.instance.grid.swapTileVisuals();
+      //Game.instance.grid.swapTileState();
+      //Game.instance.grid.swapTileVisuals();
       _cooldownCounter = cooldown;
     }
   }

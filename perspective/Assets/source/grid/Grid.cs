@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SimpleJSON;
 using System;
+using CustomExtensions;
 
 public class Grid : MonoBehaviour
 {
@@ -124,6 +125,8 @@ public class Grid : MonoBehaviour
 				throw new MissingComponentException("Prop " + linkage + " has no prop component");
 			}
 		}
+
+    Vector3Extensions.gridRef = this;
 	}
 
 	void Update() 

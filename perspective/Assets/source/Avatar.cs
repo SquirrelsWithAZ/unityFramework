@@ -17,6 +17,8 @@ public class Avatar : MonoBehaviour
   private bool _moveToTileCenter;
   private int _forcedVerticalMovement;
   private int _forcedHorizontalMovement;
+  private int _targetX;
+  private int _targetY;
 
   public void Start()
   {
@@ -95,7 +97,17 @@ public class Avatar : MonoBehaviour
       float adjustedX = (float)currGridPos.x + (1f * signAdjustment);
       int roundedX = Mathf.RoundToInt(adjustedX);
       Tile otherNeighborTile = Game.instance.grid.getTile(roundedX, currGridPos.y + verticalMovement);
-      if (!TileWalkable(directNeighborTile) || !TileWalkable(otherNeighborTile))
+
+      // direct neighbor accessible, but other not: move back to center
+      if (TileWalkable(directNeighborTile) && !TileWalkable(otherNeighborTile))
+      {
+        verticalOverstep = true;
+        if (tilePosOffset.y > 0f && verticalMovement >= 0)
+        {
+          _targetX = directNeighborTile.i;
+        }
+      }
+      else if (!TileWalkable(directNeighborTile) || !TileWalkable(otherNeighborTile))
       {
         verticalMovement = 0;
         verticalOverstep = true;
@@ -114,7 +126,7 @@ public class Avatar : MonoBehaviour
           {
             if (nearestSide != (int)Mathf.Sign(tilePosOffset.x) * -1)
             {
-              _forcedHorizontalMovement = nearestSide;
+              _targetX = directNeighborTile.i;
             }
           }
         }
@@ -137,11 +149,10 @@ public class Avatar : MonoBehaviour
       // direct neighbor accessible, but other not: move back to center
       if (TileWalkable(directNeighborTile) && !TileWalkable(otherNeighborTile))
       {
+        horizontalOverstep = true;
         if (tilePosOffset.y > 0f && verticalMovement >= 0)
         {
-          verticalMovement = 1;
-          horizontalOverstep = true;
-          _moveToTileCenter = true;
+          _targetY = directNeighborTile.j;
         }
       }
       else if (!TileWalkable(directNeighborTile) || !TileWalkable(otherNeighborTile))
@@ -163,7 +174,7 @@ public class Avatar : MonoBehaviour
           {
             if (nearestSide != (int)Mathf.Sign(tilePosOffset.y) * -1)
             {
-              _forcedVerticalMovement = nearestSide;
+              _targetY = directNeighborTile.j;
             }
           }
         }

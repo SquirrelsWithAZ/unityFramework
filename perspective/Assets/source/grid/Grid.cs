@@ -97,7 +97,8 @@ public class Grid : MonoBehaviour
         Tile tile = getTile(prop.i, prop.j);
        
         //Attach the prop to the AnimationWrap to enable animation
--       prop.transform.parent = tile.transform.FindChild("AnimationWrap");
+        prop.transform.parent = tile.transform.FindChild("AnimationWrap");
+        //prop.transform.parent = tile.transform;
 
         prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y / 2.0f, 0.0f, 1.0f);
 
@@ -116,6 +117,8 @@ public class Grid : MonoBehaviour
     Vector3Extensions.gridRef = this;
     SetupCamera();
   }
+
+  
 
   /// <summary>
   /// Sets camera position and orthographic size to encompass board

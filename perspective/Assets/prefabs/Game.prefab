@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimeTwerking: 1.5
+  timeDead: 3
   grid: {fileID: 0}
   inputManager: {fileID: 0}
   scoreManager: {fileID: 0}

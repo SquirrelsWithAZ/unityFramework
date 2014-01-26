@@ -28,6 +28,7 @@ public class Avatar : MonoBehaviour
   private bool _compedVelocity;
 
   private float unstableDurationS;
+  private Vector3 _initialTransform;
 
   public void Start()
   {
@@ -39,6 +40,8 @@ public class Avatar : MonoBehaviour
 
     this.unstableDurationS = 0.0f;
     //this.transform.gameObject.audio.Play();
+
+    _initialTransform = transform.localPosition;
   }
 
   public void FixedUpdate()
@@ -64,13 +67,27 @@ public class Avatar : MonoBehaviour
     if(tile.gameObject.layer != this.gameObject.layer &&
       tile.gameObject.layer != Tile.GetPhysicsLayerFromType(TileTypes.Neutral))
     {
-      HarlemShake(65, 0.05f);
+      HarlemShake(65, 0.2f);
       this.unstableDurationS += Time.deltaTime;
 
       //play audio when stuck
       //AudioClip clips = clipStuck;
       //clipStuck.audio.Play();
       //this.Play();
+      if (this.unstableDurationS > Game.instance.maxTimeTwerking)
+      {
+        // DEATH!
+        // TODO: spawn particle effect
+        // TODO: sound
+        transform.localPosition = _initialTransform;
+        this.unstableDurationS = 0.0f;
+        gameObject.SetActive(false);
+
+        Game.instance.setTimeout(
+          Time.time + Game.instance.timeDead,
+          () => { gameObject.SetActive(true); }
+        );
+      }
     }
     else
     {

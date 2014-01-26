@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Game : MonoBehaviour
 {
   public float maxTimeTwerking;
+  public float timeDead;
 
   public Grid grid;
   public InputManager inputManager;

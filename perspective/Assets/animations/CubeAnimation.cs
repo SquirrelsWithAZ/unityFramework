@@ -107,6 +107,7 @@ public class CubeAnimation : MonoBehaviour {
 		int i = this.transform.parent.GetComponent<Tile>().i;
 		int j = this.transform.parent.GetComponent<Tile>().j;
 		
+		//don't let the state change on initial lift
 		if (initialized)
 		{
 			Game.instance.grid.swapTileVisuals(i, j);

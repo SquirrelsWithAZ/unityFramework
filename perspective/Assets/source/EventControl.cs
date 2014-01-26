@@ -3,6 +3,11 @@ using System.Collections;
 
 public class EventControl : MonoBehaviour {
 
+	//global cooldown
+	public double cooldown;
+	public double _cooldownCounter;
+
+
 	public  float 	movementSize = 1.0f;
 
 	private float 	blockStartHeightA;

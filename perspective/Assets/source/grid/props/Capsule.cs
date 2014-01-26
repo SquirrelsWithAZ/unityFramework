@@ -80,6 +80,9 @@ public class Capsule : Prop {
                 if (!System.Object.ReferenceEquals(Owner, a) && (a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity)
                 {
                     c.transform.parent = a.transform;
+
+                    //play sound for grab
+                    //parent.audio.Play();
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
                 }
 

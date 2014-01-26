@@ -118,5 +118,7 @@ public class Capsule : Prop {
     {
       transform.parent = _spawnTile;
       transform.localPosition = _spawnPos;
+
+      Game.instance.scoreManager.AdjustPlayerScore(Owner.currentType, 1);
     }
 }

@@ -86,6 +86,8 @@ GameObject:
   - 135: {fileID: 65550839}
   - 23: {fileID: 65550838}
   - 54: {fileID: 65550837}
+  - 114: {fileID: 65550842}
+  - 111: {fileID: 65550843}
   m_Layer: 0
   m_Name: SphereCollider
   m_TagString: Untagged
@@ -155,10 +157,36 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 65550836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.74392414, y: 1.94898415, z: 7.83592606}
+  m_LocalPosition: {x: 10, y: .300000012, z: 3.20000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &65550842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65550836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a05443ba4a42e49aa83fdec854e6fb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!111 &65550843
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65550836}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 467a2b4ffb74943fd9b037440ad44028, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &89164974
 GameObject:
   m_ObjectHideFlags: 0

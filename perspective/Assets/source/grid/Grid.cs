@@ -8,22 +8,6 @@ public class Grid : MonoBehaviour
 {
 	public string levelDefinition;
 
-	/*
-	{
-	    "tileCountI" : 2,
-	    "tileCountJ" : 2,
-	    "tileWidth" : 3,
-	    "tileHeight" : 3,
-
-	    "layout" : [
-	        {"prefab" : "Tile_Type_A"},
-	        {"prefab" : "Tile_Type_A"},
-	        {"prefab" : "Tile_Type_A"},
-	        {"prefab" : "Tile_Type_B"}
-	    ]
-	}
-	*/
-
 	private int tileCountI;
 	private int tileCountJ;
 	private int tileWidth;

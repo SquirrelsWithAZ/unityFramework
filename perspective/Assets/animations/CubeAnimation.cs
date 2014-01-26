@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CubeAnimTest : MonoBehaviour {
+public class CubeAnimation : MonoBehaviour {
 
 	private bool moveUp = true;
 

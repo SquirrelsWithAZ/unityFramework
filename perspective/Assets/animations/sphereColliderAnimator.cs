@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class sphereColliderTest : MonoBehaviour {
+public class sphereColliderAnimator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

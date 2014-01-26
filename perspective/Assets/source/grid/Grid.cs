@@ -95,13 +95,17 @@ public class Grid : MonoBehaviour
 				}
 
 				Tile tile = getTile(prop.i, prop.j);
-				prop.transform.parent = tile.transform;
+
+				//Attach the prop to the AnimationWrap to enable animation
+				prop.transform.parent = tile.transform.FindChild("AnimationWrap");
 				prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y/2.0f, 0.0f, 1.0f);
+
 
 				if(!this.props.ContainsKey(prop.GetType()))
 				{
 					this.props[prop.GetType()] = new List<Prop>();
 				}
+
 				this.props[prop.GetType()].Add(prop);
 			}
 			else

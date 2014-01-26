@@ -199,12 +199,12 @@ public class Grid : MonoBehaviour
     
   }
 
-  public void swapTileVisuals()
+  public void swapTileVisuals(int i, int j)
   {
-    for(int i = 0; i < this.tileCountI; i++)
-    {
-      for(int j = 0; j < this.tileCountJ; j++)
-      {
+    //for(int i = 0; i < this.tileCountI; i++)
+    //{
+      //for(int j = 0; j < this.tileCountJ; j++)
+      //{
         GameObject tile = this.tiles[i, j];
 
         bool multiModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") == null;
@@ -215,16 +215,18 @@ public class Grid : MonoBehaviour
           modelA.SetActive(!modelA.activeSelf);
           modelB.SetActive(!modelB.activeSelf);
         }
-      }
-    }
+      //}
+    //}
   }
 
-  public void swapTileState()
+  public void swapTileState(int i, int j)
   {
+    /*
     for(int i = 0; i < this.tileCountI; i++)
     {
       for(int j = 0; j < this.tileCountJ; j++)
       {
+        */
         GameObject tile = this.tiles[i, j];
 
         bool multiModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") == null;
@@ -239,8 +241,8 @@ public class Grid : MonoBehaviour
             tile.layer = Tile.GetPhysicsLayerFromType(TileTypes.TypeA);
           }
         }
-      }
-    }
+      //}
+    //}
   }
 
   public int getTileCountI()

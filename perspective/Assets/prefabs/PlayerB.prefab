@@ -99,8 +99,8 @@ MonoBehaviour:
   currentGridPos:
     x: 0
     y: 0
-  playerNumber: 1
-  initialLayer: 0
+  playerNumber: 2
+  initialLayer: 1
   movementSpeed: 24
   smoothAroundCornerThreshold: .300000012
   _currentVelocity: {x: 0, y: 0, z: 0}

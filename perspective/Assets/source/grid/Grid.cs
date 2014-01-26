@@ -7,7 +7,8 @@ using CustomExtensions;
 public class Grid : MonoBehaviour
 {
   public string levelDefinition;
-  public GameObject playerPrefab;
+  public GameObject playerAPrefab;
+  public GameObject playerBPrefab;
 
   //grabbing these for animation calculations
   public int tileCountI;
@@ -153,8 +154,18 @@ public class Grid : MonoBehaviour
           Tile t = this.getTile(spawn.i, spawn.j);
 
           // New player
+          GameObject spawnPrefab = null;
+          switch (spawn.player)
+          {
+            case "PlayerA":
+              spawnPrefab = playerAPrefab;
+              break;
+            case "PlayerB":
+              spawnPrefab = playerBPrefab;
+              break;
+          }
           GameObject player = GameObject.Instantiate(
-            playerPrefab, 
+            spawnPrefab, 
             t.transform.position, 
             this.transform.rotation
           ) as GameObject;
@@ -166,10 +177,12 @@ public class Grid : MonoBehaviour
           );
 
           player.transform.parent = this.transform;
+          playerNumber++;
 
           Avatar a = player.GetComponent<Avatar>();
-          a.playerNumber = playerNumber++;
-          a.initialLayer = (spawn.player == "a") ? TileTypes.TypeA : TileTypes.TypeB;
+
+          //a.playerNumber = playerNumber++;
+          //a.initialLayer = (spawn.player == "a") ? TileTypes.TypeA : TileTypes.TypeB;
 
           if (a == null) throw new System.InvalidOperationException();
           this.players.Add(a);

@@ -362,6 +362,11 @@ namespace CustomExtensions
 {
   public static class Vector3Extensions
   {
+    public static Vector3 ClearY(this Vector3 v)
+    {
+      return new Vector3(v.x, 0, v.z);
+    }
+
     public static GridPos GetGridPos(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();

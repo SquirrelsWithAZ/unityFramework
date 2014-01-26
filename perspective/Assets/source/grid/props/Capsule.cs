@@ -28,6 +28,8 @@ public class Capsule : Prop {
         currentState = _state.GetType().Name;
     }
 
+    public void Reset() { _state = new Default(); }
+
     public Avatar Owner { get { return _state.GetOwner(this); } }
 
     public interface CapsuleState
@@ -44,7 +46,7 @@ public class Capsule : Prop {
         public virtual CapsuleState Update(Capsule c)
         {
             foreach(Avatar a in Game.instance.grid.players) {
-                if ((a.transform.position - c.transform.position).magnitude <= c.pickupProximity)
+                if ((a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity)
                 {
                     c.transform.parent = a.transform;
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
@@ -75,7 +77,7 @@ public class Capsule : Prop {
             MoveCapsuleToOwner(c);
 
             foreach(Avatar a in Game.instance.grid.players)
-                if (!System.Object.ReferenceEquals(Owner, a) && (a.transform.position - c.transform.position).magnitude <= c.pickupProximity)
+                if (!System.Object.ReferenceEquals(Owner, a) && (a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity)
                 {
                     c.transform.parent = a.transform;
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
@@ -87,9 +89,14 @@ public class Capsule : Prop {
               Spawn spawnProp = prop as Spawn;
               if (spawnProp.i == currentGridPos.x && spawnProp.j == currentGridPos.y)
               {
-                if((spawnProp.player == "PlayerA" && Owner.currentType == TileTypes.TypeB) ||
-                   (spawnProp.player == "PlayerB" && Owner.currentType == TileTypes.TypeA))
-                  c.Score(Owner);
+                  if (
+                    (spawnProp.player == "PlayerA" && Owner.currentType == TileTypes.TypeB) ||
+                    (spawnProp.player == "PlayerB" && Owner.currentType == TileTypes.TypeA)
+                  )
+                  {
+                      c.Score(Owner);
+                      return new Default();
+                  }
               }
             }   
 

@@ -99,10 +99,14 @@ MonoBehaviour:
   currentGridPos:
     x: 0
     y: 0
+  clipSpawn: {fileID: 8300000, guid: de34f1bc379ee435b94b51e6351ddbdc, type: 3}
+  clipStuck: {fileID: 8300000, guid: 5532755eca4c64cb0ac5632ba0296e31, type: 3}
+  clipUnstuck: {fileID: 8300000, guid: a405d941977734b3b90beec75f4ac3f7, type: 3}
   playerNumber: 1
   initialLayer: 0
   movementSpeed: 24
   smoothAroundCornerThreshold: .300000012
+  currentType: 0
   _currentVelocity: {x: 0, y: 0, z: 0}
   _targetVelocity: {x: 0, y: 0, z: 0}
   _velocityDir: 0

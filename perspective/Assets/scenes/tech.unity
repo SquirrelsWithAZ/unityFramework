@@ -787,7 +787,7 @@ Camera:
   m_GameObject: {fileID: 507365321}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -1166,6 +1166,10 @@ Prefab:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 1517238345}
+    - target: {fileID: 11400000, guid: c265a94691d1643f4b7233f24067d815, type: 2}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 2129681249}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c265a94691d1643f4b7233f24067d815, type: 2}
   m_RootGameObject: {fileID: 1450121247}
@@ -1542,7 +1546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 774896128}
   inputManager: {fileID: 1517238345}
-  scoreManager: {fileID: 0}
+  scoreManager: {fileID: 2129681249}
 --- !u!1 &1451850923
 GameObject:
   m_ObjectHideFlags: 0

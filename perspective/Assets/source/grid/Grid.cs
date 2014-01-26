@@ -121,7 +121,7 @@ public class Grid : MonoBehaviour
         prop.transform.parent = tile.transform.FindChild("AnimationWrap");
         //prop.transform.parent = tile.transform;
 
-        prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y / 2.0f, 0.0f, 1.0f);
+        prop.transform.localPosition = new Vector4(0.0f, 1.0f / 2.0f, 0.0f, 1.0f);
 
         if (!this.props.ContainsKey(prop.GetType()))
         {

@@ -56,7 +56,7 @@ public class Grid : MonoBehaviour
           tile.i = i;
           tile.j = j;
 
-          tileInstance.transform.localScale = new Vector4(this.tileWidth, 1, this.tileHeight, 0);
+          tileInstance.transform.localScale = new Vector4(this.tileWidth, this.tileWidth, this.tileHeight, 0);
           tileInstance.transform.position = new Vector4(i * this.tileWidth, 0, j * this.tileHeight, 1);
           tileInstance.transform.parent = this.transform;
 

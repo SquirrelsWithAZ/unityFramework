@@ -9,8 +9,9 @@ public class Grid : MonoBehaviour
   public string levelDefinition;
   public GameObject playerPrefab;
 
-  private int tileCountI;
-  private int tileCountJ;
+  //grabbing these for animation calculations
+  public int tileCountI;
+  public int tileCountJ;
   private int tileWidth;
   private int tileHeight;
 

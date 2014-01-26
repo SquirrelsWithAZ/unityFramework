@@ -5,17 +5,55 @@ public class CubeAnimation : MonoBehaviour {
 
 	private bool moveUp = true;
 
+	public float rollSpeed;
+	public float tiltX;
+	public float tiltZ;
+
 	// Use this for initialization
 	void Start () {
 	
 	}
 	
 	void Update () {
- 		if (Input.GetKeyUp ("1")) 
+
+		//IGNORE THIS.  NO UGLY CODE, NOTHING TO SEE HERE.
+		//1/26/14: Elijah Tate
+		
+		//this.transform.eulerAngles = new Vector3(rollSpeed * tiltX, 0, rollSpeed * tiltZ);
+		this.transform.Rotate(new Vector3(rollSpeed * tiltX, 0, rollSpeed * tiltZ));
+
+ 		if (Input.GetKeyUp ("4")) 
+ 		{
+ 			//Debug.Log("hit 4");
+	
+			//total grid size
+			//Debug.Log(range.tileCountI + " , " + range.tileCountJ);
+			//float tiltAngle = rollSpeed;
+
+			float blockSize = 3f;
+
+/*
+			//grab the parent script
+			Grid range = this.transform.parent.transform.parent.GetComponent<Grid>();
+
+			float rangeX = (float)range.tileCountJ*blockSize - blockSize;
+			float rangeZ = (float)range.tileCountI*blockSize - blockSize;
+*/
+			//DEBUG: getting exception on blue blocks
+			float rangeX = 27f;
+			float rangeZ = 27f;
+
+
+			//roll out away from center
+			tiltX =  (2f*(this.transform.position.z/rangeX)-1f);
+			tiltZ = -(2f*(this.transform.position.x/rangeZ)-1f);
+			
+        	//this.transform.eulerAngles = new Vector3(tiltAngle * tiltX, 0, tiltAngle * tiltZ);
+		
+		}
+		if (Input.GetKeyUp ("1")) 
  		{
 			animation.Play("cubeRise", PlayMode.StopAll);
-
-			//transform.eulerAngles.y = Vector2.Angle(Vector2(0,1), Vector2(hor, ver));
 		}
 
 		if (Input.GetKeyUp ("2")) 

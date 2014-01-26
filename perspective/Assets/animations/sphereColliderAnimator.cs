@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class sphereColliderAnimator : MonoBehaviour {
+public class SphereColliderAnimator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +13,7 @@ public class sphereColliderAnimator : MonoBehaviour {
 
 	if (Input.GetKeyUp ("space")) {
 			animation.Play("sphereCollider", PlayMode.StopAll);
+			Game.instance.grid.swapTileState();
 		}
 	}
 }

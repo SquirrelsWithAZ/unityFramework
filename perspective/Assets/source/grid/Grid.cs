@@ -6,132 +6,7 @@ using CustomExtensions;
 
 public class Grid : MonoBehaviour
 {
-<<<<<<< HEAD
-	public string levelDefinition;
-
-	private int tileCountI;
-	private int tileCountJ;
-	private int tileWidth;
-	private int tileHeight;
-
-	private IDictionary<string, UnityEngine.Object> actors;
-	private IDictionary<Type, List<Prop>> props;
-	private GameObject[,] tiles; 
-
-	void Awake() 
-	{
-		JSONNode jsonNode = JSON.Parse(this.levelDefinition);
-		this.tileCountI = jsonNode["tileCountI"].AsInt;
-		this.tileCountJ = jsonNode["tileCountJ"].AsInt;
-		this.tileWidth = jsonNode["tileWidth"].AsInt;
-		this.tileHeight = jsonNode["tileHeight"].AsInt;
-
-		// Load actors
-		this.actors = new Dictionary<string, UnityEngine.Object>();
-		JSONArray actorJsonNodes = jsonNode["actors"].AsArray;
-		foreach(JSONNode jsonData in actorJsonNodes)
-		{
-			string type = jsonData["type"];
-			string prefab = jsonData["prefab"];
-			this.actors[type] = Resources.Load(prefab);
-		}
-
-		// Load layout
-		this.props = new Dictionary<Type, List<Prop>>();
-		this.tiles = new GameObject[this.tileCountI, this.tileCountJ];
-		JSONNode layoutJsonNodes = jsonNode["layout"];
-
-		// Tiles
-		JSONArray layoutTileNodes = layoutJsonNodes["tiles"].AsArray;
-		for(int i = 0; i < this.tileCountI; i++)
-		{
-			for(int j = 0; j < this.tileCountJ; j++)
-			{
-				string type = layoutTileNodes[j*this.tileCountI+i]["type"];
-				UnityEngine.Object linkage = this.actors[type];
-
-				GameObject tileInstance = Instantiate(linkage) as GameObject;
-				Tile tile = tileInstance.GetComponent<Tile>();
-				if(tile != null)
-				{
-					tile.i = i;
-					tile.j = j;
-
-					tileInstance.transform.localScale = new Vector4(this.tileWidth, 1, this.tileHeight, 0);
-					tileInstance.transform.position = new Vector4(i * this.tileWidth, 0, j * this.tileHeight, 1);
-					tileInstance.transform.parent = this.transform;
-
-					this.tiles[i,j] = tileInstance;
-				}
-				else
-				{
-					throw new MissingComponentException("Tile " + linkage +  " has no tile component.");
-				}
-			}
-		}
-
-		// Props
-		JSONArray layoutPropNodes = layoutJsonNodes["props"].AsArray;
-		foreach(JSONNode propData in layoutPropNodes)
-		{
-			string type = propData["type"];
-			UnityEngine.Object linkage = this.actors[type];
-			GameObject propInstance = Instantiate(linkage) as GameObject;
-			
-			Prop prop = propInstance.GetComponent<Prop>();
-			if(prop != null)
-			{
-				prop.i = propData["i"].AsInt;
-				prop.j = propData["j"].AsInt;
-
-				if(prop is Spawn)
-				{
-					Spawn spawnProp = prop as Spawn;
-					spawnProp.player = propData["args"]["players"].AsArray[0];
-				}
-				else if(prop is Switch)
-				{
-					Switch switchProp = prop as Switch;
-					switchProp.cooldown = propData["args"]["cooldown_ms"].AsDouble;
-				}
-
-				Tile tile = getTile(prop.i, prop.j);
-
-				//Attach the prop to the AnimationWrap to enable animation
-				prop.transform.parent = tile.transform.FindChild("AnimationWrap");
-				prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y/2.0f, 0.0f, 1.0f);
-
-
-				if(!this.props.ContainsKey(prop.GetType()))
-				{
-					this.props[prop.GetType()] = new List<Prop>();
-				}
-
-				this.props[prop.GetType()].Add(prop);
-			}
-			else
-			{
-				throw new MissingComponentException("Prop " + linkage + " has no prop component");
-			}
-		}
-=======
   public string levelDefinition;
-
-  /*
-  {
-      "tileCountI" : 2,
-      "tileCountJ" : 2,
-      "tileWidth" : 3,
-      "tileHeight" : 3,
-
-      "layout" : [
-          {"prefab" : "Tile_Type_A"},
-          {"prefab" : "Tile_Type_A"},
-          {"prefab" : "Tile_Type_A"},
-          {"prefab" : "Tile_Type_B"}
-      ]
-  }
-  */
 
   private int tileCountI;
   private int tileCountJ;
@@ -140,9 +15,9 @@ public class Grid : MonoBehaviour
 
   private IDictionary<string, UnityEngine.Object> actors;
   private IDictionary<Type, List<Prop>> props;
-  private GameObject[,] tiles;
+  private GameObject[,] tiles; 
 
-  void Awake()
+  void Awake() 
   {
     JSONNode jsonNode = JSON.Parse(this.levelDefinition);
     this.tileCountI = jsonNode["tileCountI"].AsInt;
@@ -153,7 +28,7 @@ public class Grid : MonoBehaviour
     // Load actors
     this.actors = new Dictionary<string, UnityEngine.Object>();
     JSONArray actorJsonNodes = jsonNode["actors"].AsArray;
-    foreach (JSONNode jsonData in actorJsonNodes)
+    foreach(JSONNode jsonData in actorJsonNodes)
     {
       string type = jsonData["type"];
       string prefab = jsonData["prefab"];
@@ -167,16 +42,16 @@ public class Grid : MonoBehaviour
 
     // Tiles
     JSONArray layoutTileNodes = layoutJsonNodes["tiles"].AsArray;
-    for (int i = 0; i < this.tileCountI; i++)
+    for(int i = 0; i < this.tileCountI; i++)
     {
-      for (int j = 0; j < this.tileCountJ; j++)
+      for(int j = 0; j < this.tileCountJ; j++)
       {
-        string type = layoutTileNodes[j * this.tileCountI + i]["type"];
+        string type = layoutTileNodes[j*this.tileCountI+i]["type"];
         UnityEngine.Object linkage = this.actors[type];
 
         GameObject tileInstance = Instantiate(linkage) as GameObject;
         Tile tile = tileInstance.GetComponent<Tile>();
-        if (tile != null)
+        if(tile != null)
         {
           tile.i = i;
           tile.j = j;
@@ -185,48 +60,52 @@ public class Grid : MonoBehaviour
           tileInstance.transform.position = new Vector4(i * this.tileWidth, 0, j * this.tileHeight, 1);
           tileInstance.transform.parent = this.transform;
 
-          this.tiles[i, j] = tileInstance;
+          this.tiles[i,j] = tileInstance;
         }
         else
         {
-          throw new MissingComponentException("Tile " + linkage + " has no tile component.");
+          throw new MissingComponentException("Tile " + linkage +  " has no tile component.");
         }
       }
     }
 
     // Props
     JSONArray layoutPropNodes = layoutJsonNodes["props"].AsArray;
-    foreach (JSONNode propData in layoutPropNodes)
+    foreach(JSONNode propData in layoutPropNodes)
     {
       string type = propData["type"];
       UnityEngine.Object linkage = this.actors[type];
       GameObject propInstance = Instantiate(linkage) as GameObject;
-
+      
       Prop prop = propInstance.GetComponent<Prop>();
-      if (prop != null)
+      if(prop != null)
       {
         prop.i = propData["i"].AsInt;
         prop.j = propData["j"].AsInt;
 
-        if (prop is Spawn)
+        if(prop is Spawn)
         {
           Spawn spawnProp = prop as Spawn;
           spawnProp.player = propData["args"]["players"].AsArray[0];
         }
-        else if (prop is Switch)
+        else if(prop is Switch)
         {
           Switch switchProp = prop as Switch;
           switchProp.cooldown = propData["args"]["cooldown_ms"].AsDouble;
         }
 
         Tile tile = getTile(prop.i, prop.j);
-        prop.transform.parent = tile.transform;
-        prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y / 2.0f, 0.0f, 1.0f);
 
-        if (!this.props.ContainsKey(prop.GetType()))
+        //Attach the prop to the AnimationWrap to enable animation
+        prop.transform.parent = tile.transform.FindChild("AnimationWrap");
+        prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y/2.0f, 0.0f, 1.0f);
+
+
+        if(!this.props.ContainsKey(prop.GetType()))
         {
           this.props[prop.GetType()] = new List<Prop>();
         }
+
         this.props[prop.GetType()].Add(prop);
       }
       else
@@ -234,26 +113,11 @@ public class Grid : MonoBehaviour
         throw new MissingComponentException("Prop " + linkage + " has no prop component");
       }
     }
->>>>>>> c504f0f11f01b21fefece9f13a2cc3c0e770bc4d
 
     Vector3Extensions.gridRef = this;
-    SetupCamera();
   }
 
-  /// <summary>
-  /// Sets camera position and orthographic size to encompass board
-  /// </summary>
-  private void SetupCamera()
-  {
-    float fullWidth = tileCountI * tileWidth;
-    float fullHeight = tileCountJ * tileHeight;
-    Camera.main.transform.position = new Vector3(fullWidth * .5f, 10f, fullHeight * .5f) - new Vector3(tileWidth * .5f, 0f, tileHeight * .5f);
-    Camera.main.orthographicSize = Mathf.Max(fullWidth, fullHeight) * .5f;
-    if (Camera.main.aspect < 1f)
-      Camera.main.orthographicSize /= Camera.main.aspect;
-  }
-
-  void Update()
+  void Update() 
   {
 
   }
@@ -282,7 +146,7 @@ public class Grid : MonoBehaviour
   {
     return this.tileWidth;
   }
-
+  
   public int getTileHeight()
   {
     return this.tileHeight;
@@ -290,10 +154,7 @@ public class Grid : MonoBehaviour
 
   public Tile getTile(int i, int j)
   {
-    if (i < 0 || i >= tileCountI || j < 0 || j >= tileCountJ)
-      return null;
-    else
-      return this.tiles[i, j].GetComponent<Tile>();
+    return this.tiles[i, j].GetComponent<Tile>();
   }
 
   public List<Prop> getProp(Type type)
@@ -314,23 +175,23 @@ namespace CustomExtensions
   public static class Vector3Extensions
   {
     public static Grid gridRef;
-
-    public static GridPos GetGridPos(this Vector3 vec3)
+    
+    public static TilePos GetTilePos(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();
-
-      GridPos roundedPos = new GridPos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
+      
+      TilePos roundedPos = new TilePos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
       return roundedPos;
     }
-
+    
     public static Vector2 GetTilePosPrecise(this Vector3 vec3)
     {
       float xFloat = (vec3.x / (float)gridRef.getTileWidth());
       float yFloat = (vec3.z / (float)gridRef.getTileHeight());
-
+      
       return new Vector2(xFloat, yFloat);
     }
-
+    
     public static Vector2 GetTilePosOffset(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();

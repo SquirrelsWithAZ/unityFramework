@@ -27,6 +27,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
+  - 135: {fileID: 13500000}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -103,6 +104,7 @@ MonoBehaviour:
   initialLayer: 1
   movementSpeed: 24
   smoothAroundCornerThreshold: .300000012
+  currentType: 0
   _currentVelocity: {x: 0, y: 0, z: 0}
   _targetVelocity: {x: 0, y: 0, z: 0}
   _velocityDir: 0
@@ -118,6 +120,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dy: 1.5
+--- !u!135 &13500000
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -206,13 +206,22 @@ public class Grid : MonoBehaviour
       {
         GameObject tile = this.tiles[i, j];
 
-        bool singleModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") != null;
-        if(!singleModel)
+        bool multiModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") == null;
+		    if(multiModel)
         {
           GameObject modelA = tile.transform.FindChild ("AnimationWrap").FindChild("Model_A").gameObject;
           GameObject modelB = tile.transform.FindChild ("AnimationWrap").FindChild("Model_B").gameObject;
           modelA.SetActive(!modelA.activeSelf);
           modelB.SetActive(!modelB.activeSelf);
+		
+          if(tile.layer == Tile.GetPhysicsLayerFromType(TileTypes.TypeA))
+          {
+            tile.layer = Tile.GetPhysicsLayerFromType(TileTypes.TypeB);
+          }
+          else
+          {
+            tile.layer = Tile.GetPhysicsLayerFromType(TileTypes.TypeA);
+          }
         }
       }
     }
@@ -279,6 +288,11 @@ public class Grid : MonoBehaviour
     uvs[9] = v1;
     uvs[4] = v2;
     uvs[5] = v3;
+
+    uvs[12] = v0;
+    uvs[14] = v1;
+    uvs[15] = v2;
+    uvs[13] = v3;
 
     mesh.uv = uvs;
   }

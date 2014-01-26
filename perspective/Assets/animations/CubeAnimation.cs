@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CubeAnimation : MonoBehaviour {
 
+	public float fadeScalar = 1.0f;
+
 	private bool moveUp = true;
 
 	public float rollSpeed;
@@ -83,15 +85,28 @@ public class CubeAnimation : MonoBehaviour {
 		}
     }
 
+    //fires when leaving or hitting the top
     void animationEventTop()
     {
     	Debug.Log("block at top");
     }
 
+	//fires when leaving or hitting the bottom
     void animationEventBottom()
     {
     	Debug.Log("block at bottom");
     }
+
+    //gets called from the animation to change blocks
+    void changeState()
+    {
+    	Debug.Log("trying to change game state");
+    	//DEBUG: Change this once swapTileVisuals() supports the param
+		//Game.instance.grid.swapTileVisuals(fadeScalar);
+		//Game.instance.grid.swapTileVisuals();
+		Game.instance.grid.swapTileState();
+    }
+
 
     void OnTriggerEnter(Collider other)
     {

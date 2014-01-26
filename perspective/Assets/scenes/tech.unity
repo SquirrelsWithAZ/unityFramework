@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05443ba4a42e49aa83fdec854e6fb8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeScalar: 0
 --- !u!111 &65550843
 Animation:
   m_ObjectHideFlags: 0
@@ -239,7 +240,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400006, guid: effe0416e41de4934be0dd4922efec1a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -17.0337296
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: effe0416e41de4934be0dd4922efec1a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -271,7 +272,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: effe0416e41de4934be0dd4922efec1a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: effe0416e41de4934be0dd4922efec1a, type: 2}
@@ -659,7 +660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1163327825
 Transform:
   m_ObjectHideFlags: 0
@@ -667,7 +668,7 @@ Transform:
   m_PrefabInternal: {fileID: 227741723}
   m_GameObject: {fileID: 1163327824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.0337296, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1861727343}
@@ -1214,6 +1215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fac2ef4a7c784f4c9d6dd1dd480d920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeScalar: 0
   rollSpeed: 0
   tiltX: 0
   tiltZ: 0

@@ -514,10 +514,16 @@ public class Avatar : MonoBehaviour
 
   private void ChangeOccupiedTile(Tile currTile)
   {
-    //if (_occupiedTile)
-    //  _occupiedTile.transform.localScale *= 2f;
     _occupiedTile = currTile;
     _lockOutDirectionChange = false;
-    //_occupiedTile.transform.localScale *= .5f;
+
+    foreach(Prop prop in Game.instance.grid.getProp(typeof(Switch)))
+    {
+      Switch switchProp = prop as Switch;
+      if (switchProp.i == _occupiedTile.i && switchProp.j == _occupiedTile.j)
+      {
+        switchProp.StepOnSwitch();
+      }
+    }    
   }
 }

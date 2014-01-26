@@ -67,6 +67,7 @@ public class Capsule : Prop {
                     c.transform.parent = a.transform;
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
                 }
+
             return this;
         }
     }
@@ -77,7 +78,7 @@ public class Capsule : Prop {
 
         public CoolDown(Avatar owner, float dieAfter) : base(owner) { _dieAfter = dieAfter; }
 
-        public CapsuleState Update(Capsule c)
+        public override CapsuleState Update(Capsule c)
         {
             MoveCapsuleToOwner(c);
 

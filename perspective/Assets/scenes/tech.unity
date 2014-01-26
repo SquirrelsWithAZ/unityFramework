@@ -1056,7 +1056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &961538129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1117,6 +1117,10 @@ Prefab:
     - target: {fileID: 400002, guid: 7e789c37fbe14f54dbbd6f65154b49bb, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 7e789c37fbe14f54dbbd6f65154b49bb, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e789c37fbe14f54dbbd6f65154b49bb, type: 2}

@@ -14,7 +14,7 @@ public class Avatar : MonoBehaviour
 
   private iInputManager _inputManager;
   private Tile _occupiedTile;
-  private TileTypes _currentType;
+  public TileTypes currentType;
 
   public Vector3 _currentVelocity;
   public Vector3 _targetVelocity;
@@ -27,7 +27,7 @@ public class Avatar : MonoBehaviour
   {
     _inputManager = Game.instance.inputManager._PlayerInputManagers[playerNumber];
     gameObject.layer = Tile.GetPhysicsLayerFromType(initialLayer);
-    _currentType = initialLayer;
+    currentType = initialLayer;
     GridPos currentGridPos = transform.position.GetGridPos();
     ChangeOccupiedTile(Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y));
 
@@ -390,7 +390,7 @@ public class Avatar : MonoBehaviour
   private bool TileWalkable(Tile checkedTile, TileTypes walkableType = TileTypes.Neutral)
   {
     if (walkableType == TileTypes.Neutral)
-      walkableType = _currentType;
+      walkableType = currentType;
 
     return checkedTile != null && (checkedTile.gameObject.layer == Tile.GetPhysicsLayerFromType(walkableType) || checkedTile.gameObject.layer == Tile.GetPhysicsLayerFromType(TileTypes.Neutral));
   }
@@ -554,6 +554,6 @@ public class Avatar : MonoBehaviour
       {
         switchProp.StepOnSwitch();
       }
-    }    
+    }
   }
 }

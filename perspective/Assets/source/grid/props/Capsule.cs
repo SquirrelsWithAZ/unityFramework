@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using CustomExtensions;
 
 public class Capsule : Prop {
     public float swapChillSeconds;
     public float pickupProximity;
     public Vector3 carryOffset;
     public float carryMoveSpeed;
-
     public AnimationCurve carryCurve;
     public float carryMoveTime;
 
     public string currentState;
 
     private CapsuleState _state = new Default();
+    private Transform _spawnTile;
+    private Vector3 _spawnPos;
+
+    public void Start()
+    {
+      _spawnTile = transform.parent;
+      _spawnPos = transform.localPosition;
+    }
 
     public void Update()
     {
@@ -20,9 +28,12 @@ public class Capsule : Prop {
         currentState = _state.GetType().Name;
     }
 
+    public Avatar Owner { get { return _state.GetOwner(this); } }
+
     public interface CapsuleState
     {
         CapsuleState Update(Capsule c);
+        Avatar GetOwner(Capsule c);
     }
 
     /// <summary>
@@ -42,6 +53,8 @@ public class Capsule : Prop {
 
             return this;
         }
+
+        public Avatar GetOwner(Capsule c) { return null; }
     }
 
     private class Carried : CapsuleState
@@ -68,8 +81,22 @@ public class Capsule : Prop {
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
                 }
 
+            GridPos currentGridPos = c.transform.position.GetGridPos();
+            foreach (Prop prop in Game.instance.grid.getProp(typeof(Spawn)))
+            {
+              Spawn spawnProp = prop as Spawn;
+              if (spawnProp.i == currentGridPos.x && spawnProp.j == currentGridPos.y)
+              {
+                if((spawnProp.player == "PlayerA" && Owner.currentType == TileTypes.TypeB) ||
+                   (spawnProp.player == "PlayerB" && Owner.currentType == TileTypes.TypeA))
+                  c.Score(Owner);
+              }
+            }   
+
             return this;
         }
+
+        public Avatar GetOwner(Capsule c) { return Owner; }
     }
 
     private class CoolDown : Carried
@@ -85,5 +112,11 @@ public class Capsule : Prop {
             if (Time.time > _dieAfter) return new Carried(Owner);
             else return this;
         }
+    }
+
+    public void Score(Avatar Owner)
+    {
+      transform.parent = _spawnTile;
+      transform.localPosition = _spawnPos;
     }
 }

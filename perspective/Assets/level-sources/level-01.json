@@ -1,0 +1,71 @@
+{
+    "tileCountI": 3,
+    "tileCountJ": 3,
+
+    "tileWidth": 3,
+    "tileHeight": 3,
+
+    "actors": [
+        {
+            "type": "Tile_A",
+            "prefab": "Tile_Type_A"
+        },
+        {
+            "type": "Tile_B",
+            "prefab": "Tile_Type_B"
+        },
+        {
+            "type": "Switch",
+            "prefab": "Switch"
+        },
+        {
+            "type": "Spawn",
+            "prefab": "Spawn"
+        }
+    ],
+
+    "layout": {
+
+        "props": [
+            {
+                "name": "player-a-spawn",
+                "type": "Spawn",
+                "i": 0,
+                "j": 0,
+                "args": {
+                    "players": [ "a" ]
+                }
+            },
+            {
+                "name": "player-b-spawn",
+                "type": "Spawn",
+                "i": 2,
+                "j": 2,
+                "args": {
+                    "players": [ "b" ]
+                }
+            },
+            {
+                "name": "switch-a",
+                "type": "Switch",
+                "i": 1,
+                "j": 1,
+                "args": {
+                    "cooldown_ms": 0
+                }
+            }
+        ],
+
+        "tiles": [
+            { "type": "Tile_A", "args": { "state": "TypeA" } },
+            { "type": "Tile_A", "args": { "state": "TypeA" } },
+            { "type": "Tile_A", "args": { "state": "TypeA" } },
+            { "type": "Tile_A", "args": { "state": "TypeA" } },
+            { "type": "Tile_A", "args": { "state": "Neutral" } },
+            { "type": "Tile_A", "args": { "state": "Neutral" } },
+            { "type": "Tile_A", "args": { "state": "TypeB" } },
+            { "type": "Tile_A", "args": { "state": "TypeB" } },
+            { "type": "Tile_A", "args": { "state": "TypeB" } }
+        ]
+    }
+}

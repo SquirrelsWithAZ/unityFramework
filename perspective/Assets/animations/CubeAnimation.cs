@@ -115,6 +115,8 @@ public class CubeAnimation : MonoBehaviour {
 		}	
 
 		initialized = true;
+
+		//this.transform.parent.gameObject.audio.Play();
     }
 
 

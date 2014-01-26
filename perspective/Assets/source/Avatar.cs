@@ -67,6 +67,24 @@ public class Avatar : MonoBehaviour
 
       this.unstableDurationS = 0.0f;
     }
+
+    Vector3 currentOrientation = this.transform.localToWorldMatrix.GetColumn(2);
+    Vector3 desiredOrientation = this._currentVelocity;
+
+    if(desiredOrientation.sqrMagnitude > 0)
+    {
+      float dot = Vector3.Dot(currentOrientation, desiredOrientation);
+      //if(Mathf.Abs(dot) > Mathf.Epsilon)
+      {
+              float angle = Mathf.Acos(dot);
+              float normalizedFrameRotation = Mathf.Min(angle, 0.25f);
+
+              Quaternion desiredRotation = Quaternion.LookRotation(desiredOrientation);
+              desiredRotation.x = desiredRotation.z = 0.0f;
+              Quaternion newRotation = Quaternion.Slerp(transform.rotation, desiredRotation, normalizedFrameRotation);
+              this.transform.rotation = newRotation;
+      }
+    }
   }
 
   public void HarlemShake(float intensity, float range)

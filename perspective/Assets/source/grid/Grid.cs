@@ -62,26 +62,25 @@ public class Grid : MonoBehaviour
 
           this.tiles[i, j] = tileInstance;
 
-			Mesh mesh = tileInstance.transform.FindChild ("AnimationWrap").FindChild("Model").GetComponent<MeshFilter>().mesh;
-
-			Vector2[] uvs = new Vector2[24];
-			for(int v = 0; v < 24; v++)
-			{
-				uvs[v] = new Vector2();
-			}
-
-			Vector2 v0 = new Vector2(((float)i+1)/(float)this.tileCountI, ((float)j+1)/(float)this.tileCountJ); // .5, .5
-			Vector2 v1 = new Vector2((float)i/(float)this.tileCountI, (float)(j+1)/(float)this.tileCountJ); // -.5, .5
-			Vector2 v2 = new Vector2(((float)i+1)/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // .5, -5
-			Vector2 v3 = new Vector2((float)i/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // -.5, -.5
-
-
-			uvs[8] = v0;
-			uvs[9] = v1;
-			uvs[4] = v2;
-			uvs[5] = v3;
-
-			mesh.uv = uvs;
+          // HACK: Tiles have either a single models (neutral tiles) or double models.
+          bool singleModel = tileInstance.transform.FindChild("AnimationWrap").FindChild("Model") != null;
+          if(singleModel)
+          {
+            Transform model = tileInstance.transform.FindChild("AnimationWrap").FindChild("Model");
+            Mesh mesh = model.GetComponent<MeshFilter>().mesh;
+            applyGlobalGridUVs(i, j, mesh);
+          }
+          else
+          {
+            for(int subModelIndex = 0; subModelIndex < 2; subModelIndex++)
+            {
+              string subModel = subModelIndex == 0 ? "A" : "B";
+              
+              Transform model = tileInstance.transform.FindChild("AnimationWrap").FindChild("Model_" + subModel);
+              Mesh mesh = model.GetComponent<MeshFilter>().mesh;
+              applyGlobalGridUVs(i, j, mesh);
+            }
+          }
         }
         else
         {
@@ -156,7 +155,27 @@ public class Grid : MonoBehaviour
 
   void Update()
   {
+    
+  }
 
+  public void swapTileState()
+  {
+    for(int i = 0; i < this.tileCountI; i++)
+    {
+      for(int j = 0; j < this.tileCountJ; j++)
+      {
+        GameObject tile = this.tiles[i, j];
+
+        bool singleModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") != null;
+        if(!singleModel)
+        {
+          GameObject modelA = tile.transform.FindChild ("AnimationWrap").FindChild("Model_A").gameObject;
+          GameObject modelB = tile.transform.FindChild ("AnimationWrap").FindChild("Model_B").gameObject;
+          modelA.active = !modelA.active;
+          modelB.active = !modelB.active;
+        }
+      }
+    }
   }
 
   public int getTileCountI()
@@ -200,6 +219,28 @@ public class Grid : MonoBehaviour
   public List<Prop> getProp(Type type)
   {
     return this.props[type];
+  }
+
+  private void applyGlobalGridUVs(int i, int j, Mesh mesh)
+  {
+    Vector2[] uvs = new Vector2[24];
+    for(int v = 0; v < 24; v++)
+    {
+      uvs[v] = new Vector2();
+    }
+
+    Vector2 v0 = new Vector2(((float)i+1)/(float)this.tileCountI, ((float)j+1)/(float)this.tileCountJ); // .5, .5
+    Vector2 v1 = new Vector2((float)i/(float)this.tileCountI, (float)(j+1)/(float)this.tileCountJ); // -.5, .5
+    Vector2 v2 = new Vector2(((float)i+1)/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // .5, -5
+    Vector2 v3 = new Vector2((float)i/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // -.5, -.5
+
+
+    uvs[8] = v0;
+    uvs[9] = v1;
+    uvs[4] = v2;
+    uvs[5] = v3;
+
+    mesh.uv = uvs;
   }
 }
 

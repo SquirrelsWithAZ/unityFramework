@@ -27,7 +27,8 @@ public class Tile : MonoBehaviour
   }
 }
 
-public struct GridPos
+[System.Serializable]
+public class GridPos
 {
   public GridPos(int xCoord, int yCoord)
   {

@@ -3,13 +3,7 @@ using System.Collections;
 
 public class CubeAnimTest : MonoBehaviour {
 
-	public float moveSpeed = 5;
-	public float speedDamp = 0.5f;
-
-	private float speedDampV;
-	private float currentSpeed;
-
-	//public Animator cubeAnimator;
+	private bool moveUp = true;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +17,18 @@ public class CubeAnimTest : MonoBehaviour {
 		if (Input.GetKeyUp ("2")) {
 			animation.Play("cubeSink", PlayMode.StopAll);
 		}
- 
- 		
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+	  	if (other.gameObject.name == "SphereCollider")
+    	{
+    		if (moveUp)
+        		animation.Play("cubeRise", PlayMode.StopAll);
+        	else
+        		animation.Play("cubeSink", PlayMode.StopAll);
+
+        	moveUp = !moveUp;
+    	}
+	}
 }

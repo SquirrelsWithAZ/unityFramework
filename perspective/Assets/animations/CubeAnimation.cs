@@ -100,7 +100,7 @@ public class CubeAnimation : MonoBehaviour {
     //gets called from the animation to change blocks
     void changeState()
     {
-    	//Debug.Log("trying to change game state");
+    	Debug.Log("trying to change game state");
     	//DEBUG: Change this once swapTileVisuals() supports the param
 		//Game.instance.grid.swapTileVisuals(fadeScalar);
 		int i = this.transform.parent.GetComponent<Tile>().i;

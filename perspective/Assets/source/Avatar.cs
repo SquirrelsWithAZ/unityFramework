@@ -32,6 +32,7 @@ public class Avatar : MonoBehaviour
     ChangeOccupiedTile(Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y));
 
     this.unstableDurationS = 0.0f;
+    this.transform.gameObject.audio.Play();
   }
 
   public void FixedUpdate()

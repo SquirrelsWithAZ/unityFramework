@@ -27,7 +27,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
-  - 65: {fileID: 6500004}
   m_Layer: 10
   m_Name: Tile_Type_N
   m_TagString: Untagged

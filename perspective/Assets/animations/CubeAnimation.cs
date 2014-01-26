@@ -11,11 +11,35 @@ public class CubeAnimation : MonoBehaviour {
 	}
 	
 	void Update () {
- 		if (Input.GetKeyUp ("1")) {
+ 		if (Input.GetKeyUp ("1")) 
+ 		{
 			animation.Play("cubeRise", PlayMode.StopAll);
 		}
-		if (Input.GetKeyUp ("2")) {
+
+		if (Input.GetKeyUp ("2")) 
+		{
 			animation.Play("cubeSink", PlayMode.StopAll);
+		}
+
+		if (Input.GetKeyUp ("3")) 
+		{
+			if (this.transform.parent.gameObject.name == "Tile_Type_A(Clone)")
+			{
+				if (moveUp)
+					animation.Play("cubeSink", PlayMode.StopAll);
+				else
+					animation.Play("cubeRise", PlayMode.StopAll);	
+			}
+
+			if (this.transform.parent.gameObject.name == "Tile_Type_B(Clone)")
+			{
+				if (moveUp)
+					animation.Play("cubeRise", PlayMode.StopAll);
+				else
+					animation.Play("cubeSink", PlayMode.StopAll);	
+			}
+
+			moveUp = !moveUp;
 		}
     }
 
@@ -23,12 +47,23 @@ public class CubeAnimation : MonoBehaviour {
     {
 	  	if (other.gameObject.name == "SphereCollider")
     	{
-    		if (moveUp)
-        		animation.Play("cubeRise", PlayMode.StopAll);
-        	else
-        		animation.Play("cubeSink", PlayMode.StopAll);
+    		if (this.transform.parent.gameObject.name == "Tile_Type_A(Clone)")
+			{
+				if (moveUp)
+					animation.Play("cubeSink", PlayMode.StopAll);
+				else
+					animation.Play("cubeRise", PlayMode.StopAll);	
+			}
 
-        	moveUp = !moveUp;
+			if (this.transform.parent.gameObject.name == "Tile_Type_B(Clone)")
+			{
+				if (moveUp)
+					animation.Play("cubeRise", PlayMode.StopAll);
+				else
+					animation.Play("cubeSink", PlayMode.StopAll);	
+			}
+
+			moveUp = !moveUp;
     	}
 	}
 }

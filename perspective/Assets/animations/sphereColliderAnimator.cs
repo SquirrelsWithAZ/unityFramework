@@ -11,7 +11,7 @@ public class sphereColliderAnimator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	if (Input.GetKeyUp ("3")) {
+	if (Input.GetKeyUp ("space")) {
 			animation.Play("sphereCollider", PlayMode.StopAll);
 		}
 	}

@@ -21,6 +21,8 @@ public class Avatar : MonoBehaviour
   private bool _lockOutDirectionChange;
   private bool _compedVelocity;
 
+  private float unstableDurationS;
+
   public void Start()
   {
     _inputManager = Game.instance.inputManager._PlayerInputManagers[playerNumber];
@@ -28,6 +30,8 @@ public class Avatar : MonoBehaviour
     _currentType = initialLayer;
     GridPos currentGridPos = transform.position.GetGridPos();
     ChangeOccupiedTile(Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y));
+
+    this.unstableDurationS = 0.0f;
   }
 
   public void FixedUpdate()
@@ -44,9 +48,35 @@ public class Avatar : MonoBehaviour
     }
     MoveByVelocity(GetCurrentVelocity());
   }
+
   public void Update()
   {
     ProcessInput();
+
+    Tile tile = Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y);
+    if(tile.gameObject.layer != this.gameObject.layer &&
+      tile.gameObject.layer != Tile.GetPhysicsLayerFromType(TileTypes.Neutral))
+    {
+      HarlemShake(65, 0.05f);
+      this.unstableDurationS += Time.deltaTime;
+      MonoBehaviour.print(this.unstableDurationS);
+    }
+    else
+    {
+      Transform modelTransform = this.transform.FindChild("Player");
+      modelTransform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+
+      this.unstableDurationS = 0.0f;
+    }
+  }
+
+  public void HarlemShake(float intensity, float range)
+  {
+      Transform modelTransform = this.transform.FindChild("Player");
+      modelTransform.localPosition = new Vector3(
+          Mathf.Sin(Time.time*intensity) * range, 
+          0.0f,
+          Mathf.Cos(Time.time*(intensity-0.005f)) * range);
   }
 
   private void MoveByVelocity(Vector3 currentVelocity, bool useRemainder = true)
@@ -169,7 +199,7 @@ public class Avatar : MonoBehaviour
                 //if (TileWalkable(connectionTile))
                 if (Mathf.Abs(localTileOffset.y) > smoothAroundCornerThreshold && TileWalkable(connectionTile))
                 {
-                  Debug.Log("Smoothing " + (localTileOffset.y > 0 ? "up" : "down"));
+                  //Debug.Log("Smoothing " + (localTileOffset.y > 0 ? "up" : "down"));
                   // Set velocity in direction of offset
                   _targetVelocity = _currentVelocity;
                   _velocityDir = VelocityDir.Vertical;

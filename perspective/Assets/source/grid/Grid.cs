@@ -7,7 +7,8 @@ using CustomExtensions;
 public class Grid : MonoBehaviour
 {
   public string levelDefinition;
-  public GameObject playerPrefab;
+  public GameObject playerAPrefab;
+  public GameObject playerBPrefab;
 
   //grabbing these for animation calculations
   public int tileCountI;
@@ -153,8 +154,18 @@ public class Grid : MonoBehaviour
           Tile t = this.getTile(spawn.i, spawn.j);
 
           // New player
+          GameObject spawnPrefab = null;
+          switch (spawn.player)
+          {
+            case "PlayerA":
+              spawnPrefab = playerAPrefab;
+              break;
+            case "PlayerB":
+              spawnPrefab = playerBPrefab;
+              break;
+          }
           GameObject player = GameObject.Instantiate(
-            playerPrefab, 
+            spawnPrefab, 
             t.transform.position, 
             this.transform.rotation
           ) as GameObject;
@@ -166,10 +177,12 @@ public class Grid : MonoBehaviour
           );
 
           player.transform.parent = this.transform;
+          playerNumber++;
 
           Avatar a = player.GetComponent<Avatar>();
-          a.playerNumber = playerNumber++;
-          a.initialLayer = (spawn.player == "a") ? TileTypes.TypeA : TileTypes.TypeB;
+
+          //a.playerNumber = playerNumber++;
+          //a.initialLayer = (spawn.player == "a") ? TileTypes.TypeA : TileTypes.TypeB;
 
           if (a == null) throw new System.InvalidOperationException();
           this.players.Add(a);
@@ -192,6 +205,28 @@ public class Grid : MonoBehaviour
     Camera.main.orthographicSize = Mathf.Max(fullWidth, fullHeight) * .5f;
     if (Camera.main.aspect < 1f)
       Camera.main.orthographicSize /= Camera.main.aspect;
+  }
+
+  private float CalculateCameraZoomFromBounds(Bounds targetBounds, Camera cam)
+  {
+    RadianFoV fov = new RadianFoV(cam.fieldOfView, cam.aspect);
+
+    float xBound = targetBounds.extents.x / Mathf.Tan(fov._vertFoV);
+    float zBound = targetBounds.extents.z / Mathf.Tan(fov._horizFoV);
+
+    return Mathf.Max(xBound, zBound);
+  }
+
+  private struct RadianFoV
+  {
+    public float _horizFoV;
+    public float _vertFoV;
+
+    public RadianFoV(float fov, float aspect)
+    {
+      _horizFoV = fov * Mathf.Deg2Rad * 0.5f;
+      _vertFoV = Mathf.Atan(Mathf.Tan(_horizFoV) * aspect);
+    }
   }
 
   void Update()

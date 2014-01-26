@@ -343,6 +343,8 @@ MonoBehaviour:
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } }\r\n        ]\r\n
     \   }\r\n}\r\n"
   playerPrefab: {fileID: 100000, guid: 2304d5054ef410b42ad643070f4b07a1, type: 2}
+  tileCountI: 0
+  tileCountJ: 0
 --- !u!4 &89164976
 Transform:
   m_ObjectHideFlags: 0
@@ -546,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadZoneMagnitude: .200000003
-  numPlayers: 4
+  numPlayers: 0
   _updateInterval: 1
 --- !u!1001 &1712750603
 Prefab:
@@ -582,6 +584,10 @@ Prefab:
     - target: {fileID: 400000, guid: 7163b35054fa74d4194c4326cbb10353, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7163b35054fa74d4194c4326cbb10353, type: 2}
+      propertyPath: numPlayers
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7163b35054fa74d4194c4326cbb10353, type: 2}
@@ -944,7 +950,7 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

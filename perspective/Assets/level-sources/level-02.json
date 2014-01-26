@@ -21,14 +21,14 @@
                 "type": "Spawn",
                 "i": 0,
                 "j": 0,
-                "args": { "players": [ "a" ] }
+                "args": { "players": [ "PlayerA" ] }
             },
             {
                 "name": "player-b-spawn",
                 "type": "Spawn",
                 "i": 9,
                 "j": 9,
-                "args": { "players": [ "b" ] }
+                "args": { "players": [ "PlayerB" ] }
             },
             {
                 "name": "McGuffin",

@@ -119,15 +119,15 @@ MonoBehaviour:
     5,\r\n                \"j\": 5,\r\n                \"args\": {}\r\n            },\r\n
     \           {\r\n                \"name\": \"switch-a\",\r\n                \"type\":
     \"Switch\",\r\n                \"i\": 8,\r\n                \"j\": 1,\r\n                \"args\":
-    { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n                \"name\":
+    { \"cooldown_ms\": 3 }\r\n            },\r\n            {\r\n                \"name\":
     \"switch-a-prime\",\r\n                \"type\": \"Switch\",\r\n                \"i\":
     1,\r\n                \"j\": 8,\r\n                \"args\": { \"cooldown_ms\":
-    0 }\r\n            },\r\n            {\r\n                \"name\": \"switch-b\",\r\n
+    3 }\r\n            },\r\n            {\r\n                \"name\": \"switch-b\",\r\n
     \               \"type\": \"Switch\",\r\n                \"i\": 3,\r\n                \"j\":
-    5,\r\n                \"args\": { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n
+    5,\r\n                \"args\": { \"cooldown_ms\": 3 }\r\n            },\r\n            {\r\n
     \               \"name\": \"switch-b-prime\",\r\n                \"type\": \"Switch\",\r\n
     \               \"i\": 6,\r\n                \"j\": 4,\r\n                \"args\":
-    { \"cooldown_ms\": 0 }\r\n            }\r\n        ],\r\n\r\n        \"tiles\":
+    { \"cooldown_ms\": 3 }\r\n            }\r\n        ],\r\n\r\n        \"tiles\":
     [\r\n            { \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n
@@ -229,6 +229,7 @@ MonoBehaviour:
     \           { \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } }\r\n        ]\r\n
     \   }\r\n}\r\n"
+  playerPrefab: {fileID: 100000, guid: 2304d5054ef410b42ad643070f4b07a1, type: 2}
 --- !u!4 &89164976
 Transform:
   m_ObjectHideFlags: 0
@@ -634,137 +635,6 @@ Prefab:
     - target: {fileID: 400000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}
-      propertyPath: levelDefinition
-      value: "{\r\n    \"tileCountI\": 10,\r\n    \"tileCountJ\": 10,\r\n\r\n    \"tileWidth\":
-        3,\r\n    \"tileHeight\": 3,\r\n\r\n    \"actors\": [\r\n        { \"type\":
-        \"Tile_A\", \"prefab\": \"Tile_Type_A\" },\r\n        { \"type\": \"Tile_B\",
-        \"prefab\": \"Tile_Type_B\" },\r\n        { \"type\": \"Tile_N\", \"prefab\":
-        \"Tile_Type_N\" },\r\n        { \"type\": \"Switch\", \"prefab\": \"Switch\"
-        },\r\n        { \"type\": \"Spawn\", \"prefab\": \"Spawn\" },\r\n        {
-        \"type\": \"Capsule\", \"prefab\": \"Capsule\" }\r\n    ],\r\n\r\n    \"layout\":
-        {\r\n        \"props\": [\r\n            {\r\n                \"name\": \"player-a-spawn\",\r\n
-        \               \"type\": \"Spawn\",\r\n                \"i\": 0,\r\n                \"j\":
-        0,\r\n                \"args\": { \"players\": [ \"a\" ] }\r\n            },\r\n
-        \           {\r\n                \"name\": \"player-b-spawn\",\r\n                \"type\":
-        \"Spawn\",\r\n                \"i\": 9,\r\n                \"j\": 9,\r\n                \"args\":
-        { \"players\": [ \"b\" ] }\r\n            },\r\n            {\r\n                \"name\":
-        \"McGuffin\",\r\n                \"type\": \"Capsule\",\r\n                \"i\":
-        5,\r\n                \"j\": 5,\r\n                \"args\": {}\r\n            },\r\n
-        \           {\r\n                \"name\": \"switch-a\",\r\n                \"type\":
-        \"Switch\",\r\n                \"i\": 8,\r\n                \"j\": 1,\r\n
-        \               \"args\": { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n
-        \               \"name\": \"switch-a-prime\",\r\n                \"type\":
-        \"Switch\",\r\n                \"i\": 1,\r\n                \"j\": 8,\r\n
-        \               \"args\": { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n
-        \               \"name\": \"switch-b\",\r\n                \"type\": \"Switch\",\r\n
-        \               \"i\": 3,\r\n                \"j\": 5,\r\n                \"args\":
-        { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n                \"name\":
-        \"switch-b-prime\",\r\n                \"type\": \"Switch\",\r\n                \"i\":
-        6,\r\n                \"j\": 4,\r\n                \"args\": { \"cooldown_ms\":
-        0 }\r\n            }\r\n        ],\r\n\r\n        \"tiles\": [\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } }\r\n        ]\r\n
-        \   }\r\n}\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}

@@ -64,7 +64,6 @@ public class Grid : MonoBehaviour
         }
         else
         {
-          throw new MissingComponentException("Tile " + linkage +  " has no tile component.");
           throw new MissingComponentException("Tile " + linkage + " has no tile component.");
         }
       }
@@ -168,7 +167,6 @@ public class Grid : MonoBehaviour
 
   public Tile getTile(int i, int j)
   {
-    return this.tiles[i, j].GetComponent<Tile>();
     if (i < 0 || i >= tileCountI || j < 0 || j >= tileCountJ)
       return null;
     else
@@ -193,14 +191,10 @@ namespace CustomExtensions
   public static class Vector3Extensions
   {
     public static Grid gridRef;
-    
-    public static TilePos GetTilePos(this Vector3 vec3)
 
     public static GridPos GetGridPos(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();
-      
-      TilePos roundedPos = new TilePos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
 
       GridPos roundedPos = new GridPos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
       return roundedPos;

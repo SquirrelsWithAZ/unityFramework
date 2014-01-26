@@ -215,31 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d46ad61c17b4f98a8cdd3972d5447e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDefinition: "\n{\n    \"tileCountI\": 3,\n    \"tileCountJ\": 3,\n\n    \"tileWidth\":
-    3,\n    \"tileHeight\": 3,\n\n    \"actors\": [\n        {\n            \"type\":
-    \"Tile_A\",\n            \"prefab\": \"Tile_Type_A\"\n        },\n        {\n
-    \           \"type\": \"Tile_B\",\n            \"prefab\": \"Tile_Type_B\"\n        },\n
-    \       {\n            \"type\": \"Switch\",\n            \"prefab\": \"Switch\"\n
-    \       },\n        {\n            \"type\": \"Spawn\",\n            \"prefab\":
-    \"Spawn\"\n        }\n    ],\n\n    \"layout\": {\n\n        \"props\": [\n            {\n
-    \               \"name\": \"player-a-spawn\",\n                \"type\": \"Spawn\",\n
-    \               \"i\": 0,\n                \"j\": 0,\n                \"args\":
-    {\n                    \"players\": [ \"a\" ]\n                }\n            },\n
-    \           {\n                \"name\": \"player-b-spawn\",\n                \"type\":
-    \"Spawn\",\n                \"i\": 2,\n                \"j\": 2,\n                \"args\":
-    {\n                    \"players\": [ \"b\" ]\n                }\n            },\n
-    \           {\n                \"name\": \"switch-a\",\n                \"type\":
-    \"Switch\",\n                \"i\": 1,\n                \"j\": 1,\n                \"args\":
-    {\n                    \"cooldown_ms\": 1000\n                }\n            }\n
-    \       ],\n\n        \"tiles\": [\n            { \"type\": \"Tile_A\", \"args\":
-    { \"state\": \"TypeA\" } },\n            { \"type\": \"Tile_B\", \"args\": { \"state\":
-    \"TypeA\" } },\n            { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeA\"
-    } },\n            { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeA\" } },\n
-    \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"Neutral\" } },\n
-    \           { \"type\": \"Tile_A\", \"args\": { \"state\": \"Neutral\" } },\n
-    \           { \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeB\" } },\n            {
-    \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeB\" } },\n            { \"type\":
-    \"Tile_A\", \"args\": { \"state\": \"TypeB\" } }\n        ]\n    }\n}"
+  levelDefinition: '{"tileCountI":10,"tileCountJ":10,"tileWidth":3,"tileHeight":3,"actors":[{"type":"Tile_A","prefab":"Tile_Type_A"},{"type":"Tile_B","prefab":"Tile_Type_B"},{"type":"Tile_N","prefab":"Tile_Type_N"},{"type":"Switch","prefab":"Switch"},{"type":"Spawn","prefab":"Spawn"},{"type":"Capsule","prefab":"Capsule"}],"layout":{"props":[{"name":"player-a-spawn","type":"Spawn","i":0,"j":0,"args":{"players":["a"]}},{"name":"player-b-spawn","type":"Spawn","i":9,"j":9,"args":{"players":["b"]}},{"name":"McGuffin","type":"Capsule","i":5,"j":5,"args":{}},{"name":"switch-a","type":"Switch","i":8,"j":1,"args":{"cooldown_ms":0}},{"name":"switch-a-prime","type":"Switch","i":1,"j":8,"args":{"cooldown_ms":0}},{"name":"switch-b","type":"Switch","i":3,"j":5,"args":{"cooldown_ms":0}},{"name":"switch-b-prime","type":"Switch","i":6,"j":4,"args":{"cooldown_ms":0}}],"tiles":[{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}}]}}'
 --- !u!4 &89164976
 Transform:
   m_ObjectHideFlags: 0
@@ -522,32 +498,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}
       propertyPath: levelDefinition
-      value: "\n{\n    \"tileCountI\": 3,\n    \"tileCountJ\": 3,\n\n    \"tileWidth\":
-        3,\n    \"tileHeight\": 3,\n\n    \"actors\": [\n        {\n            \"type\":
-        \"Tile_A\",\n            \"prefab\": \"Tile_Type_A\"\n        },\n        {\n
-        \           \"type\": \"Tile_B\",\n            \"prefab\": \"Tile_Type_B\"\n
-        \       },\n        {\n            \"type\": \"Switch\",\n            \"prefab\":
-        \"Switch\"\n        },\n        {\n            \"type\": \"Spawn\",\n            \"prefab\":
-        \"Spawn\"\n        }\n    ],\n\n    \"layout\": {\n\n        \"props\": [\n
-        \           {\n                \"name\": \"player-a-spawn\",\n                \"type\":
-        \"Spawn\",\n                \"i\": 0,\n                \"j\": 0,\n                \"args\":
-        {\n                    \"players\": [ \"a\" ]\n                }\n            },\n
-        \           {\n                \"name\": \"player-b-spawn\",\n                \"type\":
-        \"Spawn\",\n                \"i\": 2,\n                \"j\": 2,\n                \"args\":
-        {\n                    \"players\": [ \"b\" ]\n                }\n            },\n
-        \           {\n                \"name\": \"switch-a\",\n                \"type\":
-        \"Switch\",\n                \"i\": 1,\n                \"j\": 1,\n                \"args\":
-        {\n                    \"cooldown_ms\": 1000\n                }\n            }\n
-        \       ],\n\n        \"tiles\": [\n            { \"type\": \"Tile_A\", \"args\":
-        { \"state\": \"TypeA\" } },\n            { \"type\": \"Tile_B\", \"args\":
-        { \"state\": \"TypeA\" } },\n            { \"type\": \"Tile_B\", \"args\":
-        { \"state\": \"TypeA\" } },\n            { \"type\": \"Tile_B\", \"args\":
-        { \"state\": \"TypeA\" } },\n            { \"type\": \"Tile_B\", \"args\":
-        { \"state\": \"Neutral\" } },\n            { \"type\": \"Tile_A\", \"args\":
-        { \"state\": \"Neutral\" } },\n            { \"type\": \"Tile_A\", \"args\":
-        { \"state\": \"TypeB\" } },\n            { \"type\": \"Tile_A\", \"args\":
-        { \"state\": \"TypeB\" } },\n            { \"type\": \"Tile_A\", \"args\":
-        { \"state\": \"TypeB\" } }\n        ]\n    }\n}"
+      value: '{"tileCountI":10,"tileCountJ":10,"tileWidth":3,"tileHeight":3,"actors":[{"type":"Tile_A","prefab":"Tile_Type_A"},{"type":"Tile_B","prefab":"Tile_Type_B"},{"type":"Tile_N","prefab":"Tile_Type_N"},{"type":"Switch","prefab":"Switch"},{"type":"Spawn","prefab":"Spawn"},{"type":"Capsule","prefab":"Capsule"}],"layout":{"props":[{"name":"player-a-spawn","type":"Spawn","i":0,"j":0,"args":{"players":["a"]}},{"name":"player-b-spawn","type":"Spawn","i":9,"j":9,"args":{"players":["b"]}},{"name":"McGuffin","type":"Capsule","i":5,"j":5,"args":{}},{"name":"switch-a","type":"Switch","i":8,"j":1,"args":{"cooldown_ms":0}},{"name":"switch-a-prime","type":"Switch","i":1,"j":8,"args":{"cooldown_ms":0}},{"name":"switch-b","type":"Switch","i":3,"j":5,"args":{"cooldown_ms":0}},{"name":"switch-b-prime","type":"Switch","i":6,"j":4,"args":{"cooldown_ms":0}}],"tiles":[{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_N","args":{"state":"Neutral"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_B","args":{"state":"TypeB"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_A","args":{"state":"TypeA"}},{"type":"Tile_B","args":{"state":"TypeB"}}]}}'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}
@@ -755,7 +706,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032258186}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 1.09521127, y: 8.13903809, z: 1.75270486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -783,7 +734,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2073113100}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: -1.82621989e-08, z: -.153194413}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

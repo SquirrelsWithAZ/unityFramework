@@ -6,6 +6,11 @@ public class Tile : MonoBehaviour
   public int i;
   public int j;
 
+  public Vector3 GetWorldPosition()
+  {
+    return transform.position;
+  }
+
   public static int GetPhysicsLayerFromType(TileTypes tileType)
   {
     switch(tileType)
@@ -22,9 +27,9 @@ public class Tile : MonoBehaviour
   }
 }
 
-public struct TilePos
+public struct GridPos
 {
-  public TilePos(int xCoord, int yCoord)
+  public GridPos(int xCoord, int yCoord)
   {
     x = xCoord;
     y = yCoord;

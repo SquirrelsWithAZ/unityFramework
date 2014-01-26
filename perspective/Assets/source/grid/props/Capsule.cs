@@ -16,6 +16,8 @@ public class Capsule : Prop {
     private Transform _spawnTile;
     private Vector3 _spawnPos;
 
+
+
     public void Start()
     {
       _spawnTile = transform.parent;
@@ -48,7 +50,9 @@ public class Capsule : Prop {
             foreach(Avatar a in Game.instance.grid.players) {
                 if ((a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity)
                 {
+                    //play sound for grab
                     c.transform.parent = a.transform;
+                    c.transform.gameObject.audio.Play();
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
                 }
             }
@@ -82,7 +86,7 @@ public class Capsule : Prop {
                     c.transform.parent = a.transform;
 
                     //play sound for grab
-                    //parent.audio.Play();
+                    c.transform.gameObject.audio.Play();
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
                 }
 

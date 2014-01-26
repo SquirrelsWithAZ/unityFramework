@@ -22,6 +22,12 @@ public class EventControl : MonoBehaviour {
 		moveDistance = movementSize / 2;
 		moveBlockByTag(moveDistance);
 		moving=true;
+		//moveDistance = movementSize / 2;
+		//moveBlockByTag(moveDistance);
+		//moving=true;
+		Debug.Log("Game Started");
+
+
 	}
 
 

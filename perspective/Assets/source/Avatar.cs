@@ -59,7 +59,6 @@ public class Avatar : MonoBehaviour
     {
       HarlemShake(65, 0.05f);
       this.unstableDurationS += Time.deltaTime;
-      MonoBehaviour.print(this.unstableDurationS);
     }
     else
     {

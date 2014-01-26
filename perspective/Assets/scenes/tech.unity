@@ -87,7 +87,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29808e446a4a34477a7696e9c284977e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.14635086
+      value: 11.8000002
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29808e446a4a34477a7696e9c284977e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -108,6 +108,14 @@ Prefab:
     - target: {fileID: 400000, guid: 29808e446a4a34477a7696e9c284977e, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 29808e446a4a34477a7696e9c284977e, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 29808e446a4a34477a7696e9c284977e, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29808e446a4a34477a7696e9c284977e, type: 2}
@@ -691,8 +699,8 @@ Transform:
   m_PrefabInternal: {fileID: 21906029}
   m_GameObject: {fileID: 401363593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.1845713, y: 7.14635086, z: -2.1270678}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 10.1845713, y: 11.8000002, z: -2.1270678}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 42398024}
   - {fileID: 910056287}
@@ -2050,6 +2058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimeTwerking: 1.5
+  timeDead: 3
   grid: {fileID: 774896128}
   inputManager: {fileID: 1517238345}
   scoreManager: {fileID: 2129681249}

@@ -5,7 +5,7 @@ public class SphereColliderAnimation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		animation.Play("sphereCollider", PlayMode.StopAll);
 	}
 	
 	// Update is called once per frame

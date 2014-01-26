@@ -14,6 +14,8 @@ public class CubeAnimation : MonoBehaviour {
  		if (Input.GetKeyUp ("1")) 
  		{
 			animation.Play("cubeRise", PlayMode.StopAll);
+
+			//transform.eulerAngles.y = Vector2.Angle(Vector2(0,1), Vector2(hor, ver));
 		}
 
 		if (Input.GetKeyUp ("2")) 

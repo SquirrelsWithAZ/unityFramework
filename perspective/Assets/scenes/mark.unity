@@ -224,23 +224,23 @@ MonoBehaviour:
     \"Capsule\", \"prefab\": \"Capsule\" }\r\n    ],\r\n\r\n    \"layout\": {\r\n
     \       \"props\": [\r\n            {\r\n                \"name\": \"player-a-spawn\",\r\n
     \               \"type\": \"Spawn\",\r\n                \"i\": 0,\r\n                \"j\":
-    0,\r\n                \"args\": { \"players\": [ \"a\" ] }\r\n            },\r\n
+    0,\r\n                \"args\": { \"players\": [ \"PlayerA\" ] }\r\n            },\r\n
     \           {\r\n                \"name\": \"player-b-spawn\",\r\n                \"type\":
     \"Spawn\",\r\n                \"i\": 9,\r\n                \"j\": 9,\r\n                \"args\":
-    { \"players\": [ \"b\" ] }\r\n            },\r\n            {\r\n                \"name\":
+    { \"players\": [ \"PlayerB\" ] }\r\n            },\r\n            {\r\n                \"name\":
     \"McGuffin\",\r\n                \"type\": \"Capsule\",\r\n                \"i\":
     5,\r\n                \"j\": 5,\r\n                \"args\": {}\r\n            },\r\n
     \           {\r\n                \"name\": \"switch-a\",\r\n                \"type\":
     \"Switch\",\r\n                \"i\": 8,\r\n                \"j\": 1,\r\n                \"args\":
-    { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n                \"name\":
+    { \"cooldown_ms\": 3 }\r\n            },\r\n            {\r\n                \"name\":
     \"switch-a-prime\",\r\n                \"type\": \"Switch\",\r\n                \"i\":
     1,\r\n                \"j\": 8,\r\n                \"args\": { \"cooldown_ms\":
-    0 }\r\n            },\r\n            {\r\n                \"name\": \"switch-b\",\r\n
+    3 }\r\n            },\r\n            {\r\n                \"name\": \"switch-b\",\r\n
     \               \"type\": \"Switch\",\r\n                \"i\": 3,\r\n                \"j\":
-    5,\r\n                \"args\": { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n
+    5,\r\n                \"args\": { \"cooldown_ms\": 3 }\r\n            },\r\n            {\r\n
     \               \"name\": \"switch-b-prime\",\r\n                \"type\": \"Switch\",\r\n
     \               \"i\": 6,\r\n                \"j\": 4,\r\n                \"args\":
-    { \"cooldown_ms\": 0 }\r\n            }\r\n        ],\r\n\r\n        \"tiles\":
+    { \"cooldown_ms\": 3 }\r\n            }\r\n        ],\r\n\r\n        \"tiles\":
     [\r\n            { \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n
@@ -342,7 +342,8 @@ MonoBehaviour:
     \           { \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } }\r\n        ]\r\n
     \   }\r\n}\r\n"
-  playerPrefab: {fileID: 100000, guid: 2304d5054ef410b42ad643070f4b07a1, type: 2}
+  playerAPrefab: {fileID: 100000, guid: 1b9e5bb14e728d940b0b8f9559a49c8e, type: 2}
+  playerBPrefab: {fileID: 100000, guid: 967ec6f631d127e4e93e263196f20d99, type: 2}
   tileCountI: 0
   tileCountJ: 0
 --- !u!4 &89164976
@@ -446,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 89164975}
   inputManager: {fileID: 1517238345}
+  scoreManager: {fileID: 0}
 --- !u!1 &1451850923
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,137 +631,6 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}
-      propertyPath: levelDefinition
-      value: "{\r\n    \"tileCountI\": 10,\r\n    \"tileCountJ\": 10,\r\n\r\n    \"tileWidth\":
-        3,\r\n    \"tileHeight\": 3,\r\n\r\n    \"actors\": [\r\n        { \"type\":
-        \"Tile_A\", \"prefab\": \"Tile_Type_A\" },\r\n        { \"type\": \"Tile_B\",
-        \"prefab\": \"Tile_Type_B\" },\r\n        { \"type\": \"Tile_N\", \"prefab\":
-        \"Tile_Type_N\" },\r\n        { \"type\": \"Switch\", \"prefab\": \"Switch\"
-        },\r\n        { \"type\": \"Spawn\", \"prefab\": \"Spawn\" },\r\n        {
-        \"type\": \"Capsule\", \"prefab\": \"Capsule\" }\r\n    ],\r\n\r\n    \"layout\":
-        {\r\n        \"props\": [\r\n            {\r\n                \"name\": \"player-a-spawn\",\r\n
-        \               \"type\": \"Spawn\",\r\n                \"i\": 0,\r\n                \"j\":
-        0,\r\n                \"args\": { \"players\": [ \"a\" ] }\r\n            },\r\n
-        \           {\r\n                \"name\": \"player-b-spawn\",\r\n                \"type\":
-        \"Spawn\",\r\n                \"i\": 9,\r\n                \"j\": 9,\r\n                \"args\":
-        { \"players\": [ \"b\" ] }\r\n            },\r\n            {\r\n                \"name\":
-        \"McGuffin\",\r\n                \"type\": \"Capsule\",\r\n                \"i\":
-        5,\r\n                \"j\": 5,\r\n                \"args\": {}\r\n            },\r\n
-        \           {\r\n                \"name\": \"switch-a\",\r\n                \"type\":
-        \"Switch\",\r\n                \"i\": 8,\r\n                \"j\": 1,\r\n
-        \               \"args\": { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n
-        \               \"name\": \"switch-a-prime\",\r\n                \"type\":
-        \"Switch\",\r\n                \"i\": 1,\r\n                \"j\": 8,\r\n
-        \               \"args\": { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n
-        \               \"name\": \"switch-b\",\r\n                \"type\": \"Switch\",\r\n
-        \               \"i\": 3,\r\n                \"j\": 5,\r\n                \"args\":
-        { \"cooldown_ms\": 0 }\r\n            },\r\n            {\r\n                \"name\":
-        \"switch-b-prime\",\r\n                \"type\": \"Switch\",\r\n                \"i\":
-        6,\r\n                \"j\": 4,\r\n                \"args\": { \"cooldown_ms\":
-        0 }\r\n            }\r\n        ],\r\n\r\n        \"tiles\": [\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_N\", \"args\": { \"state\": \"Neutral\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n            {
-        \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } }\r\n        ]\r\n
-        \   }\r\n}\r\n"
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}
   m_RootGameObject: {fileID: 89164974}
@@ -903,6 +774,7 @@ GameObject:
   - 92: {fileID: 2032258189}
   - 124: {fileID: 2032258188}
   - 81: {fileID: 2032258187}
+  - 114: {fileID: 2032258192}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -950,7 +822,7 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -972,6 +844,25 @@ Transform:
   m_Children:
   - {fileID: 2073113101}
   m_Father: {fileID: 0}
+--- !u!114 &2032258192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2032258186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e483f2a380b52f843bc1ac3729cef894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 2032258190}
+  gravity: 5
+  inverseLookAt: {x: 0, y: 1, z: 0}
+  yScale: 2
+  currentAreaOfInterest:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  idealPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2073113100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +900,7 @@ Light:
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: .349999994
+  m_Intensity: 2.9000001
   m_Range: 76.6953583
   m_SpotAngle: 30
   m_CookieSize: 10

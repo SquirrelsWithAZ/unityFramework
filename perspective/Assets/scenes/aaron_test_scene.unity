@@ -395,10 +395,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b390c795ab5e3e4ea7924f49fee0fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentGridPos:
+    x: 0
+    y: 0
   playerNumber: 1
   initialLayer: 0
-  movementSpeed: 3
+  movementSpeed: 24
   smoothAroundCornerThreshold: .300000012
+  _currentVelocity: {x: 0, y: 0, z: 0}
+  _targetVelocity: {x: 0, y: 0, z: 0}
+  _velocityDir: 0
 --- !u!4 &835866392
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,7 +1135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &2102994606
 Renderer:
   m_ObjectHideFlags: 0
@@ -1169,10 +1175,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b390c795ab5e3e4ea7924f49fee0fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentGridPos:
+    x: 0
+    y: 0
   playerNumber: 2
   initialLayer: 1
-  movementSpeed: .25
+  movementSpeed: 24
   smoothAroundCornerThreshold: .300000012
+  _currentVelocity: {x: 0, y: 0, z: 0}
+  _targetVelocity: {x: 0, y: 0, z: 0}
+  _velocityDir: 0
 --- !u!4 &2102994610
 Transform:
   m_ObjectHideFlags: 0

@@ -520,6 +520,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: effe0416e41de4934be0dd4922efec1a, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: effe0416e41de4934be0dd4922efec1a, type: 2}
       propertyPath: m_IsActive
       value: 0

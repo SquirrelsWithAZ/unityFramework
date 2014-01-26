@@ -4,8 +4,6 @@ using CustomExtensions;
 
 public class Avatar : MonoBehaviour
 {
-  public string status;
-  public string more;
   public GridPos currentGridPos;
 
   public int playerNumber;
@@ -45,46 +43,34 @@ public class Avatar : MonoBehaviour
     float velocityRemainder = 0f;
     Tile pivotTile = null;
 
-    status = "";
-
     // current velocity is horizontal
     if (currentVelocity.x != 0)
     {
-      status += "move_x ";
-
       // movement right
       if (currentVelocity.x > 0)
       {
-        status += "r ";
-
         // right of center (movement right)
         if (localTileOffset.x > 0)
         {
-          status += "right_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x + 1, currentGridPos.y);
         }
         // at center or left of it (movement right)
         else
         {
-          status += "self_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y);
         }
       }
       // movement left
       else
       {
-        status += "l ";
-
         // right of center (movement left)
         if (localTileOffset.x < 0)
         {
-          status += "left_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x - 1, currentGridPos.y);
         }
         // at center or left of it (movement right)
         else
         {
-          status += "self_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y);
         }
       }
@@ -111,6 +97,7 @@ public class Avatar : MonoBehaviour
             if (TileWalkable(tileAhead))
             {
               _velocityDir = VelocityDir.Vertical;
+              Debug.Log("Changing course to " + _velocityDir + " with remainder velocity of " + velocityRemainder);
               _targetVelocity = _currentVelocity;
               _currentVelocity = desiredVelocity.normalized;
               MoveByVelocity(desiredVelocity.normalized * velocityRemainder, false);
@@ -121,7 +108,6 @@ public class Avatar : MonoBehaviour
               Tile otherTileAhead = Game.instance.grid.getTile(pivotTile.i + (int)Mathf.Sign(currentVelocity.x), pivotTile.j + (int)Mathf.Sign(localTileOffset.y));
               if (TileWalkable(tileAhead) && (localTileOffset.y == 0 || TileWalkable(otherTileAhead)))
               {
-                //MoveByVelocity(currentVelocity.normalized * velocityRemainder, false);
                 SetPosition(movedPos);
               }
             }
@@ -132,68 +118,60 @@ public class Avatar : MonoBehaviour
             Tile otherTileAhead = Game.instance.grid.getTile(pivotTile.i + (int)Mathf.Sign(currentVelocity.x), pivotTile.j + (int)Mathf.Sign(localTileOffset.y));
             if (TileWalkable(tileAhead) && (localTileOffset.y == 0 || TileWalkable(otherTileAhead)))
             {
-              //MoveByVelocity(currentVelocity.normalized * velocityRemainder, false);
               SetPosition(movedPos);
             }
           }
+        }
+        else
+        {
+          SetPosition(movedPos);
         }
       }
       // If not, just move
       else
       {
         Tile tileAhead = Game.instance.grid.getTile(pivotTile.i, pivotTile.j);
-        Tile otherTileAhead = Game.instance.grid.getTile(pivotTile.i, pivotTile.j + (int)Mathf.Sign(localTileOffset.y));
-        if (TileWalkable(tileAhead))// && (localTileOffset.y == 0 || TileWalkable(otherTileAhead)))
+        if (TileWalkable(tileAhead))
+        {
           SetPosition(movedPos);
+        }
       }
     }
     // current velocity is vertical
     else if (currentVelocity.z != 0)
     {
-      status += "move_y ";
-
-      // movement right
+      // movement north
       if (currentVelocity.z > 0)
       {
-        status += "move_u ";
-
-        // right of center (movement right)
+        // north of center (movement north)
         if (localTileOffset.y > 0)
         {
-          status += "up_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y + 1);
         }
-        // at center or left of it (movement right)
+        // at center or south of it (movement north)
         else
         {
-          status += "self_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y);
         }
       }
-      // movement left
+      // movement south
       else
       {
-        status += "move_d ";
-        // right of center (movement left)
-        if (localTileOffset.x < 0)
+        // south of center (movement south)
+        if (localTileOffset.y < 0)
         {
-          status += "dn_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y - 1);
         }
-        // at center or left of it (movement right)
+        // at center or north of it (movement south)
         else
         {
-          status += "self_pivot ";
           pivotTile = Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y);
         }
       }
-
       // Get position diff between avatar to tile and avatar to moved-pos
       Vector3 movedPos = transform.position + currentVelocity;
       float movementDelta = Mathf.Abs(currentVelocity.z);
       float centerTileDelta = Mathf.Abs(pivotTile.GetWorldPosition().z - transform.position.z);
-
-      more = string.Format("mp = {0},{1},{2}; md = {3}; ctd = {4}", movedPos.x, movedPos.y, movedPos.z, movementDelta, centerTileDelta);
 
       // If moving past next tile center
       if (movementDelta > centerTileDelta)
@@ -212,6 +190,7 @@ public class Avatar : MonoBehaviour
             {
               _velocityDir = VelocityDir.Horizontal;
               _targetVelocity = _currentVelocity;
+              Debug.Log("Changing course to " + _velocityDir + " with remainder velocity of " + velocityRemainder);
               _currentVelocity = desiredVelocity.normalized;
               MoveByVelocity(desiredVelocity.normalized * velocityRemainder, false);
             }
@@ -222,7 +201,6 @@ public class Avatar : MonoBehaviour
               if (TileWalkable(tileAhead) && (localTileOffset.x == 0 || TileWalkable(otherTileAhead)))
               {
                 SetPosition(movedPos);
-                //MoveByVelocity(currentVelocity.normalized * velocityRemainder, false);
               }
             }
           }
@@ -233,7 +211,6 @@ public class Avatar : MonoBehaviour
             if (TileWalkable(tileAhead) && (localTileOffset.x == 0 || TileWalkable(otherTileAhead)))
             {
               SetPosition(movedPos);
-              //MoveByVelocity(currentVelocity.normalized * velocityRemainder, false);
             }
           }
         }
@@ -241,11 +218,8 @@ public class Avatar : MonoBehaviour
       // If not, just move
       else
       {
-        //Debug.Log("Moved from " + transform.position.z + " to " + movedPos.z + " with pivot at " + pivotTile.GetWorldPosition().z);
-        //Debug.Log("Current x " + currentGridPos.x + ", Current y " + currentGridPos.y);
         Tile tileAhead = Game.instance.grid.getTile(pivotTile.i, pivotTile.j);
-        Tile otherTileAhead = Game.instance.grid.getTile(pivotTile.i + (int)Mathf.Sign(localTileOffset.x), pivotTile.j);
-        if (TileWalkable(tileAhead))// && (localTileOffset.x == 0 || TileWalkable(otherTileAhead)))
+        if (TileWalkable(tileAhead))
         {
           SetPosition(movedPos);
         }
@@ -332,8 +306,16 @@ public class Avatar : MonoBehaviour
     {
       if (_velocityDir != VelocityDir.Horizontal)
       {
-        _currentVelocity = new Vector3(0f, 0f, 0f);
-        _velocityDir = VelocityDir.Static;
+        if (_targetVelocity.x != 0f)
+        {
+          _currentVelocity = _targetVelocity;
+          _velocityDir = VelocityDir.Horizontal;
+        }
+        else
+        {
+          _currentVelocity = new Vector3(0f, 0f, 0f);
+          _velocityDir = VelocityDir.Static;
+        }
       }
       else
         _targetVelocity = new Vector3(0f, 0f, 0f);
@@ -342,8 +324,16 @@ public class Avatar : MonoBehaviour
     {
       if (_velocityDir != VelocityDir.Horizontal)
       {
-        _currentVelocity = new Vector3(0f, 0f, 0f);
-        _velocityDir = VelocityDir.Static;
+        if (_targetVelocity.x != 0f)
+        {
+          _currentVelocity = _targetVelocity;
+          _velocityDir = VelocityDir.Horizontal;
+        }
+        else
+        {
+          _currentVelocity = new Vector3(0f, 0f, 0f);
+          _velocityDir = VelocityDir.Static;
+        }
       }
       else
         _targetVelocity = new Vector3(0f, 0f, 0f);
@@ -353,8 +343,16 @@ public class Avatar : MonoBehaviour
     {
       if (_velocityDir != VelocityDir.Vertical)
       {
-        _currentVelocity = new Vector3(0f, 0f, 0f);
-        _velocityDir = VelocityDir.Static;
+        if (_targetVelocity.z != 0f)
+        {
+          _currentVelocity = _targetVelocity;
+          _velocityDir = VelocityDir.Vertical;
+        }
+        else
+        {
+          _currentVelocity = new Vector3(0f, 0f, 0f);
+          _velocityDir = VelocityDir.Static;
+        }
       }
       else
         _targetVelocity = new Vector3(0f, 0f, 0f);
@@ -363,8 +361,16 @@ public class Avatar : MonoBehaviour
     {
       if (_velocityDir != VelocityDir.Vertical)
       {
-        _currentVelocity = new Vector3(0f, 0f, 0f);
-        _velocityDir = VelocityDir.Static;
+        if (_targetVelocity.z != 0f)
+        {
+          _currentVelocity = _targetVelocity;
+          _velocityDir = VelocityDir.Vertical;
+        }
+        else
+        {
+          _currentVelocity = new Vector3(0f, 0f, 0f);
+          _velocityDir = VelocityDir.Static;
+        }
       }
       else
         _targetVelocity = new Vector3(0f, 0f, 0f);

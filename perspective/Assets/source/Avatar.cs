@@ -6,6 +6,12 @@ public class Avatar : MonoBehaviour
 {
   public GridPos currentGridPos;
 
+/*
+  public AudioClip clipSpawn;
+  public AudioClip clipStuck;
+  public AudioClip clipUnstuck;
+*/
+
   public int playerNumber;
   public TileTypes initialLayer;
 
@@ -32,7 +38,7 @@ public class Avatar : MonoBehaviour
     ChangeOccupiedTile(Game.instance.grid.getTile(currentGridPos.x, currentGridPos.y));
 
     this.unstableDurationS = 0.0f;
-    this.transform.gameObject.audio.Play();
+    //this.transform.gameObject.audio.Play();
   }
 
   public void FixedUpdate()
@@ -60,6 +66,11 @@ public class Avatar : MonoBehaviour
     {
       HarlemShake(65, 0.05f);
       this.unstableDurationS += Time.deltaTime;
+
+      //play audio when stuck
+      //AudioClip clips = clipStuck;
+      //clipStuck.audio.Play();
+      //this.Play();
     }
     else
     {

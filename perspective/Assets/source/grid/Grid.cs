@@ -42,16 +42,12 @@ public class Grid : MonoBehaviour
 
     // Tiles
     JSONArray layoutTileNodes = layoutJsonNodes["tiles"].AsArray;
-    for(int i = 0; i < this.tileCountI; i++)
     {
-      for(int j = 0; j < this.tileCountJ; j++)
       {
-        string type = layoutTileNodes[j*this.tileCountI+i]["type"];
         UnityEngine.Object linkage = this.actors[type];
 
         GameObject tileInstance = Instantiate(linkage) as GameObject;
         Tile tile = tileInstance.GetComponent<Tile>();
-        if(tile != null)
         {
           tile.i = i;
           tile.j = j;
@@ -60,52 +56,46 @@ public class Grid : MonoBehaviour
           tileInstance.transform.position = new Vector4(i * this.tileWidth, 0, j * this.tileHeight, 1);
           tileInstance.transform.parent = this.transform;
 
-          this.tiles[i,j] = tileInstance;
         }
         else
         {
           throw new MissingComponentException("Tile " + linkage +  " has no tile component.");
+          throw new MissingComponentException("Tile " + linkage + " has no tile component.");
         }
       }
     }
 
     // Props
     JSONArray layoutPropNodes = layoutJsonNodes["props"].AsArray;
-    foreach(JSONNode propData in layoutPropNodes)
     {
       string type = propData["type"];
       UnityEngine.Object linkage = this.actors[type];
       GameObject propInstance = Instantiate(linkage) as GameObject;
-      
       Prop prop = propInstance.GetComponent<Prop>();
-      if(prop != null)
       {
         prop.i = propData["i"].AsInt;
         prop.j = propData["j"].AsInt;
 
-        if(prop is Spawn)
         {
           Spawn spawnProp = prop as Spawn;
           spawnProp.player = propData["args"]["players"].AsArray[0];
         }
-        else if(prop is Switch)
         {
           Switch switchProp = prop as Switch;
           switchProp.cooldown = propData["args"]["cooldown_ms"].AsDouble;
         }
 
         Tile tile = getTile(prop.i, prop.j);
-
         //Attach the prop to the AnimationWrap to enable animation
         prop.transform.parent = tile.transform.FindChild("AnimationWrap");
         prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y/2.0f, 0.0f, 1.0f);
+-       prop.transform.parent = tile.transform.FindChild("AnimationWrap");
 
+        prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y / 2.0f, 0.0f, 1.0f);
 
-        if(!this.props.ContainsKey(prop.GetType()))
         {
           this.props[prop.GetType()] = new List<Prop>();
         }
-
         this.props[prop.GetType()].Add(prop);
       }
       else
@@ -115,9 +105,22 @@ public class Grid : MonoBehaviour
     }
 
     Vector3Extensions.gridRef = this;
+    SetupCamera();
   }
 
-  void Update() 
+  /// <summary>
+  /// Sets camera position and orthographic size to encompass board
+  /// </summary>
+  private void SetupCamera()
+  {
+    float fullWidth = tileCountI * tileWidth;
+    float fullHeight = tileCountJ * tileHeight;
+    Camera.main.transform.position = new Vector3(fullWidth * .5f, 10f, fullHeight * .5f) - new Vector3(tileWidth * .5f, 0f, tileHeight * .5f);
+    Camera.main.orthographicSize = Mathf.Max(fullWidth, fullHeight) * .5f;
+    if (Camera.main.aspect < 1f)
+      Camera.main.orthographicSize /= Camera.main.aspect;
+  }
+
   {
 
   }
@@ -146,7 +149,6 @@ public class Grid : MonoBehaviour
   {
     return this.tileWidth;
   }
-  
   public int getTileHeight()
   {
     return this.tileHeight;
@@ -155,6 +157,10 @@ public class Grid : MonoBehaviour
   public Tile getTile(int i, int j)
   {
     return this.tiles[i, j].GetComponent<Tile>();
+    if (i < 0 || i >= tileCountI || j < 0 || j >= tileCountJ)
+      return null;
+    else
+      return this.tiles[i, j].GetComponent<Tile>();
   }
 
   public List<Prop> getProp(Type type)
@@ -177,21 +183,22 @@ namespace CustomExtensions
     public static Grid gridRef;
     
     public static TilePos GetTilePos(this Vector3 vec3)
+
+    public static GridPos GetGridPos(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();
       
       TilePos roundedPos = new TilePos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
+
+      GridPos roundedPos = new GridPos(Mathf.RoundToInt(precisePos.x), Mathf.RoundToInt(precisePos.y));
       return roundedPos;
     }
-    
     public static Vector2 GetTilePosPrecise(this Vector3 vec3)
     {
       float xFloat = (vec3.x / (float)gridRef.getTileWidth());
       float yFloat = (vec3.z / (float)gridRef.getTileHeight());
-      
       return new Vector2(xFloat, yFloat);
     }
-    
     public static Vector2 GetTilePosOffset(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();

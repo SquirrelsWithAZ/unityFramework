@@ -62,6 +62,7 @@ public class Grid : MonoBehaviour
 
           this.tiles[i, j] = tileInstance;
 
+      Mesh mesh = tileInstance.transform.FindChild ("AnimationWrap").FindChild("Model").GetComponent<MeshFilter>().mesh;
 
 			Vector2[] uvs = new Vector2[24];
 			for(int v = 0; v < 24; v++)

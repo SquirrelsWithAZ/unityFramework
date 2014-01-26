@@ -249,6 +249,10 @@ public class Avatar : MonoBehaviour
         {
           SetPosition(movedPos);
         }
+        else
+        {
+          Debug.Log("Tile at " + pivotTile.i + ", " + pivotTile.j + " is not walkable");
+        }
       }
     }
 

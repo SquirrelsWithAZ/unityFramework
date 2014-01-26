@@ -10,7 +10,8 @@
         { "type": "Tile_B", "prefab": "Tile_Type_B" },
         { "type": "Tile_N", "prefab": "Tile_Type_N" },
         { "type": "Switch", "prefab": "Switch" },
-        { "type": "Spawn", "prefab": "Spawn" }
+        { "type": "Spawn", "prefab": "Spawn" },
+        { "type": "Capsule", "prefab": "Capsule" }
     ],
 
     "layout": {
@@ -28,6 +29,13 @@
                 "i": 9,
                 "j": 9,
                 "args": { "players": [ "b" ] }
+            },
+            {
+                "name": "McGuffin",
+                "type": "Capsule",
+                "i": 5,
+                "j": 5,
+                "args": {}
             },
             {
                 "name": "switch-a",

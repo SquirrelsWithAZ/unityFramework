@@ -21,7 +21,7 @@ public class SphereColliderAnimation : MonoBehaviour {
 	public void Trigger(int i, int j)
 	{
 		//Debug.Log("sphere is listening");
-		transform.position = new Vector3(0, 0, 0);
+		transform.position = new Vector3(i, 0, j);
 		animation.Play("sphereCollider", PlayMode.StopAll);
 	}
 }

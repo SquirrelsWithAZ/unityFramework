@@ -37,7 +37,7 @@ public class Switch : Prop
       Debug.Log("switch is at: " + i + " , " + j);
 
       GameObject sphere = GameObject.Find("SphereCollider");
-      sphere.GetComponent<SphereColliderAnimation>().Trigger(i, j);
+      sphere.GetComponent<SphereColliderAnimation>().Trigger(i*3, j*3);
   }
 
 }

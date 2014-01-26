@@ -25,6 +25,23 @@ public class Tile : MonoBehaviour
         return LayerMask.NameToLayer("TileTypeNeutral");
     }
   }
+
+  public GameObject ActiveModel
+  {
+    get
+    {
+      bool singleModel = this.transform.FindChild("AnimationWrap").FindChild("Model") != null;
+      if (!singleModel)
+      {
+        GameObject modelA = this.transform.FindChild("AnimationWrap").FindChild("Model_A").gameObject;
+        GameObject modelB = this.transform.FindChild("AnimationWrap").FindChild("Model_B").gameObject;
+
+        return modelA.activeSelf ? modelA : modelB; // Yes, we really want activeSelf
+      }
+      else
+        return this.transform.FindChild("AnimationWrap").FindChild("Model").gameObject;
+    }
+  }
 }
 
 [System.Serializable]

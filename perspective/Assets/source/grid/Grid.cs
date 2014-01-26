@@ -7,6 +7,7 @@ using CustomExtensions;
 public class Grid : MonoBehaviour
 {
   public string levelDefinition;
+  public GameObject playerPrefab;
 
   private int tileCountI;
   private int tileCountJ;
@@ -15,7 +16,8 @@ public class Grid : MonoBehaviour
 
   private IDictionary<string, UnityEngine.Object> actors;
   private IDictionary<Type, List<Prop>> props;
-  private GameObject[,] tiles; 
+  private GameObject[,] tiles;
+  private List<Avatar> players;
 
   void Awake() 
   {
@@ -94,6 +96,7 @@ public class Grid : MonoBehaviour
     foreach (JSONNode propData in layoutPropNodes)
     {
       string type = propData["type"];
+
       UnityEngine.Object linkage = this.actors[type];
       GameObject propInstance = Instantiate(linkage) as GameObject;
 
@@ -134,7 +137,44 @@ public class Grid : MonoBehaviour
       }
     }
 
-    Vector3Extensions.gridRef = this;
+    // Spawn players
+    List<Prop> spawns = this.props[typeof(Spawn)];
+
+    int playerNumber = 1;
+    this.players = new List<Avatar>();
+
+    if(spawns != null)
+        foreach (Prop spawnProp in spawns)
+        {
+          Spawn spawn = spawnProp as Spawn;
+          if (spawn == null) throw new System.InvalidCastException();
+
+          Tile t = this.getTile(spawn.i, spawn.j);
+
+          // New player
+          GameObject player = GameObject.Instantiate(
+            playerPrefab, 
+            t.transform.position, 
+            this.transform.rotation
+          ) as GameObject;
+          if (player == null) throw new System.InvalidOperationException();
+          player.transform.localScale = new Vector3(
+            this.getTileWidth() * player.transform.localScale.x,
+            player.transform.localScale.y,
+            this.getTileHeight() * player.transform.localScale.z
+          );
+
+          player.transform.parent = this.transform;
+
+          Avatar a = player.GetComponent<Avatar>();
+          a.playerNumber = playerNumber++;
+          a.initialLayer = (spawn.player == "a") ? TileTypes.TypeA : TileTypes.TypeB;
+
+          if (a == null) throw new System.InvalidOperationException();
+          this.players.Add(a);
+        }
+
+    // Finish by setting up the camera.
     SetupCamera();
   }
 
@@ -171,8 +211,8 @@ public class Grid : MonoBehaviour
         {
           GameObject modelA = tile.transform.FindChild ("AnimationWrap").FindChild("Model_A").gameObject;
           GameObject modelB = tile.transform.FindChild ("AnimationWrap").FindChild("Model_B").gameObject;
-          modelA.active = !modelA.active;
-          modelB.active = !modelB.active;
+          modelA.SetActive(!modelA.activeSelf);
+          modelB.SetActive(!modelB.activeSelf);
         }
       }
     }
@@ -255,8 +295,6 @@ namespace CustomExtensions
 {
   public static class Vector3Extensions
   {
-    public static Grid gridRef;
-
     public static GridPos GetGridPos(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();
@@ -267,8 +305,8 @@ namespace CustomExtensions
 
     public static Vector2 GetTilePosPrecise(this Vector3 vec3)
     {
-      float xFloat = (vec3.x / (float)gridRef.getTileWidth());
-      float yFloat = (vec3.z / (float)gridRef.getTileHeight());
+      float xFloat = (vec3.x / (float)Game.instance.grid.getTileWidth());
+      float yFloat = (vec3.z / (float)Game.instance.grid.getTileHeight());
 
       return new Vector2(xFloat, yFloat);
     }

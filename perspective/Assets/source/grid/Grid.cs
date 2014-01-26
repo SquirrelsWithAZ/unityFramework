@@ -207,6 +207,28 @@ public class Grid : MonoBehaviour
       Camera.main.orthographicSize /= Camera.main.aspect;
   }
 
+  private float CalculateCameraZoomFromBounds(Bounds targetBounds, Camera cam)
+  {
+    RadianFoV fov = new RadianFoV(cam.fieldOfView, cam.aspect);
+
+    float xBound = targetBounds.extents.x / Mathf.Tan(fov._vertFoV);
+    float zBound = targetBounds.extents.z / Mathf.Tan(fov._horizFoV);
+
+    return Mathf.Max(xBound, zBound);
+  }
+
+  private struct RadianFoV
+  {
+    public float _horizFoV;
+    public float _vertFoV;
+
+    public RadianFoV(float fov, float aspect)
+    {
+      _horizFoV = fov * Mathf.Deg2Rad * 0.5f;
+      _vertFoV = Mathf.Atan(Mathf.Tan(_horizFoV) * aspect);
+    }
+  }
+
   void Update()
   {
     

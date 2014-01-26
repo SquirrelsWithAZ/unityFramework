@@ -342,6 +342,7 @@ MonoBehaviour:
     \           { \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeA\" } },\r\n
     \           { \"type\": \"Tile_B\", \"args\": { \"state\": \"TypeB\" } }\r\n        ]\r\n
     \   }\r\n}\r\n"
+  playerPrefab: {fileID: 100000, guid: 2304d5054ef410b42ad643070f4b07a1, type: 2}
 --- !u!4 &89164976
 Transform:
   m_ObjectHideFlags: 0

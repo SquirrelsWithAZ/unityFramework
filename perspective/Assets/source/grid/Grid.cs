@@ -7,6 +7,7 @@ using CustomExtensions;
 public class Grid : MonoBehaviour
 {
   public string levelDefinition;
+  public GameObject playerPrefab;
 
   //grabbing these for animation calculations
   public int tileCountI;
@@ -16,7 +17,8 @@ public class Grid : MonoBehaviour
 
   private IDictionary<string, UnityEngine.Object> actors;
   private IDictionary<Type, List<Prop>> props;
-  private GameObject[,] tiles; 
+  private GameObject[,] tiles;
+  private List<Avatar> players;
 
   void Awake() 
   {
@@ -63,26 +65,25 @@ public class Grid : MonoBehaviour
 
           this.tiles[i, j] = tileInstance;
 
-      Mesh mesh = tileInstance.transform.FindChild ("AnimationWrap").FindChild("Model").GetComponent<MeshFilter>().mesh;
-
-			Vector2[] uvs = new Vector2[24];
-			for(int v = 0; v < 24; v++)
-			{
-				uvs[v] = new Vector2();
-			}
-
-			Vector2 v0 = new Vector2(((float)i+1)/(float)this.tileCountI, ((float)j+1)/(float)this.tileCountJ); // .5, .5
-			Vector2 v1 = new Vector2((float)i/(float)this.tileCountI, (float)(j+1)/(float)this.tileCountJ); // -.5, .5
-			Vector2 v2 = new Vector2(((float)i+1)/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // .5, -5
-			Vector2 v3 = new Vector2((float)i/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // -.5, -.5
-
-
-			uvs[8] = v0;
-			uvs[9] = v1;
-			uvs[4] = v2;
-			uvs[5] = v3;
-
-			mesh.uv = uvs;
+          // HACK: Tiles have either a single models (neutral tiles) or double models.
+          bool singleModel = tileInstance.transform.FindChild("AnimationWrap").FindChild("Model") != null;
+          if(singleModel)
+          {
+            Transform model = tileInstance.transform.FindChild("AnimationWrap").FindChild("Model");
+            Mesh mesh = model.GetComponent<MeshFilter>().mesh;
+            applyGlobalGridUVs(i, j, mesh);
+          }
+          else
+          {
+            for(int subModelIndex = 0; subModelIndex < 2; subModelIndex++)
+            {
+              string subModel = subModelIndex == 0 ? "A" : "B";
+              
+              Transform model = tileInstance.transform.FindChild("AnimationWrap").FindChild("Model_" + subModel);
+              Mesh mesh = model.GetComponent<MeshFilter>().mesh;
+              applyGlobalGridUVs(i, j, mesh);
+            }
+          }
         }
         else
         {
@@ -96,6 +97,7 @@ public class Grid : MonoBehaviour
     foreach (JSONNode propData in layoutPropNodes)
     {
       string type = propData["type"];
+
       UnityEngine.Object linkage = this.actors[type];
       GameObject propInstance = Instantiate(linkage) as GameObject;
 
@@ -136,7 +138,44 @@ public class Grid : MonoBehaviour
       }
     }
 
-    Vector3Extensions.gridRef = this;
+    // Spawn players
+    List<Prop> spawns = this.props[typeof(Spawn)];
+
+    int playerNumber = 1;
+    this.players = new List<Avatar>();
+
+    if(spawns != null)
+        foreach (Prop spawnProp in spawns)
+        {
+          Spawn spawn = spawnProp as Spawn;
+          if (spawn == null) throw new System.InvalidCastException();
+
+          Tile t = this.getTile(spawn.i, spawn.j);
+
+          // New player
+          GameObject player = GameObject.Instantiate(
+            playerPrefab, 
+            t.transform.position, 
+            this.transform.rotation
+          ) as GameObject;
+          if (player == null) throw new System.InvalidOperationException();
+          player.transform.localScale = new Vector3(
+            this.getTileWidth() * player.transform.localScale.x,
+            player.transform.localScale.y,
+            this.getTileHeight() * player.transform.localScale.z
+          );
+
+          player.transform.parent = this.transform;
+
+          Avatar a = player.GetComponent<Avatar>();
+          a.playerNumber = playerNumber++;
+          a.initialLayer = (spawn.player == "a") ? TileTypes.TypeA : TileTypes.TypeB;
+
+          if (a == null) throw new System.InvalidOperationException();
+          this.players.Add(a);
+        }
+
+    // Finish by setting up the camera.
     SetupCamera();
   }
 
@@ -157,7 +196,36 @@ public class Grid : MonoBehaviour
 
   void Update()
   {
+    
+  }
 
+  public void swapTileState()
+  {
+    for(int i = 0; i < this.tileCountI; i++)
+    {
+      for(int j = 0; j < this.tileCountJ; j++)
+      {
+        GameObject tile = this.tiles[i, j];
+
+        bool multiModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") == null;
+		    if(multiModel)
+        {
+          GameObject modelA = tile.transform.FindChild ("AnimationWrap").FindChild("Model_A").gameObject;
+          GameObject modelB = tile.transform.FindChild ("AnimationWrap").FindChild("Model_B").gameObject;
+          modelA.SetActive(!modelA.activeSelf);
+          modelB.SetActive(!modelB.activeSelf);
+		
+          if(tile.layer == Tile.GetPhysicsLayerFromType(TileTypes.TypeA))
+          {
+            tile.layer = Tile.GetPhysicsLayerFromType(TileTypes.TypeB);
+          }
+          else
+          {
+            tile.layer = Tile.GetPhysicsLayerFromType(TileTypes.TypeA);
+          }
+        }
+      }
+    }
   }
 
   public int getTileCountI()
@@ -202,6 +270,33 @@ public class Grid : MonoBehaviour
   {
     return this.props[type];
   }
+
+  private void applyGlobalGridUVs(int i, int j, Mesh mesh)
+  {
+    Vector2[] uvs = new Vector2[24];
+    for(int v = 0; v < 24; v++)
+    {
+      uvs[v] = new Vector2();
+    }
+
+    Vector2 v0 = new Vector2(((float)i+1)/(float)this.tileCountI, ((float)j+1)/(float)this.tileCountJ); // .5, .5
+    Vector2 v1 = new Vector2((float)i/(float)this.tileCountI, (float)(j+1)/(float)this.tileCountJ); // -.5, .5
+    Vector2 v2 = new Vector2(((float)i+1)/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // .5, -5
+    Vector2 v3 = new Vector2((float)i/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // -.5, -.5
+
+
+    uvs[8] = v0;
+    uvs[9] = v1;
+    uvs[4] = v2;
+    uvs[5] = v3;
+
+    uvs[12] = v0;
+    uvs[14] = v1;
+    uvs[15] = v2;
+    uvs[13] = v3;
+
+    mesh.uv = uvs;
+  }
 }
 
 public enum TileTypes
@@ -215,8 +310,6 @@ namespace CustomExtensions
 {
   public static class Vector3Extensions
   {
-    public static Grid gridRef;
-
     public static GridPos GetGridPos(this Vector3 vec3)
     {
       Vector2 precisePos = vec3.GetTilePosPrecise();
@@ -227,8 +320,8 @@ namespace CustomExtensions
 
     public static Vector2 GetTilePosPrecise(this Vector3 vec3)
     {
-      float xFloat = (vec3.x / (float)gridRef.getTileWidth());
-      float yFloat = (vec3.z / (float)gridRef.getTileHeight());
+      float xFloat = (vec3.x / (float)Game.instance.grid.getTileWidth());
+      float yFloat = (vec3.z / (float)Game.instance.grid.getTileHeight());
 
       return new Vector2(xFloat, yFloat);
     }

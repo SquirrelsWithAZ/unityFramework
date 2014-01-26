@@ -74,6 +74,68 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &270012778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 270012780}
+  - 108: {fileID: 270012779}
+  m_Layer: 0
+  m_Name: Spotlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &270012779
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 270012778}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: .629999995
+  m_Range: 58.1650314
+  m_SpotAngle: 122
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
+--- !u!4 &270012780
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 270012778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2039479187}
 --- !u!1 &931776593
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +199,7 @@ MonoBehaviour:
     \           { \"type\": \"Tile_A\", \"args\": { \"state\": \"Neutral\" } },\n
     \           { \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeB\" } },\n            {
     \"type\": \"Tile_A\", \"args\": { \"state\": \"TypeB\" } },\n            { \"type\":
-    \"Tile_A\", \"args\": { \"state\": \"TypeB\" } }\n        ]\n    }\n}\n"
+    \"Tile_A\", \"args\": { \"state\": \"TypeB\" } }\n        ]\n    }\n}"
 --- !u!1001 &951491185
 Prefab:
   m_ObjectHideFlags: 0
@@ -200,7 +262,7 @@ Prefab:
         { \"state\": \"Neutral\" } },\n            { \"type\": \"Tile_A\", \"args\":
         { \"state\": \"TypeB\" } },\n            { \"type\": \"Tile_A\", \"args\":
         { \"state\": \"TypeB\" } },\n            { \"type\": \"Tile_A\", \"args\":
-        { \"state\": \"TypeB\" } }\n        ]\n    }\n}\n"
+        { \"state\": \"TypeB\" } }\n        ]\n    }\n}"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfeca02ea4e6447b1ace931ddddb1096, type: 2}
@@ -364,8 +426,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2039479182}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 1.98586881, y: 12.9487658, z: 1.23373532}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 270012780}
   m_Father: {fileID: 0}

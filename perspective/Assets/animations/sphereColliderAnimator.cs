@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class sphereColliderTest : MonoBehaviour {
+public class sphereColliderAnimator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,7 +11,7 @@ public class sphereColliderTest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	if (Input.GetKeyUp ("3")) {
+	if (Input.GetKeyUp ("space")) {
 			animation.Play("sphereCollider", PlayMode.StopAll);
 		}
 	}

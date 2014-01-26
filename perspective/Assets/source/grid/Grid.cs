@@ -8,22 +8,6 @@ public class Grid : MonoBehaviour
 {
   public string levelDefinition;
 
-  /*
-  {
-      "tileCountI" : 2,
-      "tileCountJ" : 2,
-      "tileWidth" : 3,
-      "tileHeight" : 3,
-
-      "layout" : [
-          {"prefab" : "Tile_Type_A"},
-          {"prefab" : "Tile_Type_A"},
-          {"prefab" : "Tile_Type_A"},
-          {"prefab" : "Tile_Type_B"}
-      ]
-  }
-  */
-
   private int tileCountI;
   private int tileCountJ;
   private int tileWidth;
@@ -31,9 +15,9 @@ public class Grid : MonoBehaviour
 
   private IDictionary<string, UnityEngine.Object> actors;
   private IDictionary<Type, List<Prop>> props;
-  private GameObject[,] tiles;
+  private GameObject[,] tiles; 
 
-  void Awake()
+  void Awake() 
   {
     JSONNode jsonNode = JSON.Parse(this.levelDefinition);
     this.tileCountI = jsonNode["tileCountI"].AsInt;
@@ -44,7 +28,7 @@ public class Grid : MonoBehaviour
     // Load actors
     this.actors = new Dictionary<string, UnityEngine.Object>();
     JSONArray actorJsonNodes = jsonNode["actors"].AsArray;
-    foreach (JSONNode jsonData in actorJsonNodes)
+    foreach(JSONNode jsonData in actorJsonNodes)
     {
       string type = jsonData["type"];
       string prefab = jsonData["prefab"];
@@ -72,11 +56,32 @@ public class Grid : MonoBehaviour
           tile.i = i;
           tile.j = j;
 
-          tileInstance.transform.localScale = new Vector4(this.tileWidth, 1, this.tileHeight, 0);
+          tileInstance.transform.localScale = new Vector4(this.tileWidth, this.tileWidth, this.tileHeight, 0);
           tileInstance.transform.position = new Vector4(i * this.tileWidth, 0, j * this.tileHeight, 1);
           tileInstance.transform.parent = this.transform;
 
           this.tiles[i, j] = tileInstance;
+
+			Mesh mesh = tileInstance.transform.FindChild ("AnimationWrap").FindChild("Model").GetComponent<MeshFilter>().mesh;
+
+			Vector2[] uvs = new Vector2[24];
+			for(int v = 0; v < 24; v++)
+			{
+				uvs[v] = new Vector2();
+			}
+
+			Vector2 v0 = new Vector2(((float)i+1)/(float)this.tileCountI, ((float)j+1)/(float)this.tileCountJ); // .5, .5
+			Vector2 v1 = new Vector2((float)i/(float)this.tileCountI, (float)(j+1)/(float)this.tileCountJ); // -.5, .5
+			Vector2 v2 = new Vector2(((float)i+1)/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // .5, -5
+			Vector2 v3 = new Vector2((float)i/(float)this.tileCountI, (float)j/(float)this.tileCountJ); // -.5, -.5
+
+
+			uvs[8] = v0;
+			uvs[9] = v1;
+			uvs[4] = v2;
+			uvs[5] = v3;
+
+			mesh.uv = uvs;
         }
         else
         {
@@ -111,8 +116,12 @@ public class Grid : MonoBehaviour
         }
 
         Tile tile = getTile(prop.i, prop.j);
-        prop.transform.parent = tile.transform;
-        prop.transform.localPosition = new Vector4(0.0f, tile.transform.localScale.y / 2.0f, 0.0f, 1.0f);
+       
+        //Attach the prop to the AnimationWrap to enable animation
+        prop.transform.parent = tile.transform.FindChild("AnimationWrap");
+        //prop.transform.parent = tile.transform;
+
+        prop.transform.localPosition = new Vector4(0.0f, 1.0f / 2.0f, 0.0f, 1.0f);
 
         if (!this.props.ContainsKey(prop.GetType()))
         {
@@ -129,6 +138,8 @@ public class Grid : MonoBehaviour
     Vector3Extensions.gridRef = this;
     SetupCamera();
   }
+
+  
 
   /// <summary>
   /// Sets camera position and orthographic size to encompass board

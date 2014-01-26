@@ -84,7 +84,7 @@ Animation:
   - {fileID: 7400000, guid: 3f04a2bd134394feeb95c797a55668e0, type: 2}
   - {fileID: 7400000, guid: 0133432b0f71e4dc3954d9d9d33f9f80, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &11400000

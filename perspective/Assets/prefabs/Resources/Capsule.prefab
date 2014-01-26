@@ -117,7 +117,15 @@ MonoBehaviour:
   i: 0
   j: 0
   swapChillSeconds: 1
-  pickupProximity: 2
+  pickupProximity: 4
+  carryOffset: {x: 0, y: .5, z: 0}
+  carryMoveSpeed: .899999976
+  carryCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  carryMoveTime: 0
   currentState: 
 --- !u!136 &13600000
 CapsuleCollider:

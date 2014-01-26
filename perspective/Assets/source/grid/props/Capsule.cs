@@ -4,6 +4,11 @@ using System.Collections;
 public class Capsule : Prop {
     public float swapChillSeconds;
     public float pickupProximity;
+    public Vector3 carryOffset;
+    public float carryMoveSpeed;
+
+    public AnimationCurve carryCurve;
+    public float carryMoveTime;
 
     public string currentState;
 
@@ -25,7 +30,7 @@ public class Capsule : Prop {
     /// </summary>
     private class Default : CapsuleState
     {
-        public CapsuleState Update(Capsule c)
+        public virtual CapsuleState Update(Capsule c)
         {
             foreach(Avatar a in Game.instance.grid.players) {
                 if ((a.transform.position - c.transform.position).magnitude <= c.pickupProximity)
@@ -41,13 +46,23 @@ public class Capsule : Prop {
 
     private class Carried : CapsuleState
     {
-        private Avatar _owner;
+        public Avatar Owner { get; private set; }
 
-        public Carried(Avatar owner) { _owner = owner; }
+        public Carried(Avatar owner) { Owner = owner; }
 
-        public CapsuleState Update(Capsule c) {
+        protected void MoveCapsuleToOwner(Capsule c)
+        {
+            Vector3 offset = c.transform.localPosition - c.carryOffset;
+            offset *= c.carryMoveSpeed * Time.deltaTime;
+
+            c.transform.localPosition = c.carryOffset + offset;
+        }
+
+        public virtual CapsuleState Update(Capsule c) {
+            MoveCapsuleToOwner(c);
+
             foreach(Avatar a in Game.instance.grid.players)
-                if (!System.Object.ReferenceEquals(_owner, a) && (a.transform.position - c.transform.position).magnitude <= c.pickupProximity)
+                if (!System.Object.ReferenceEquals(Owner, a) && (a.transform.position - c.transform.position).magnitude <= c.pickupProximity)
                 {
                     c.transform.parent = a.transform;
                     return new CoolDown(a, Time.time + c.swapChillSeconds);
@@ -56,16 +71,17 @@ public class Capsule : Prop {
         }
     }
 
-    private class CoolDown : CapsuleState
+    private class CoolDown : Carried
     {
         private float _dieAfter;
-        private Avatar _owner;
 
-        public CoolDown(Avatar owner, float dieAfter) { _owner = owner; _dieAfter = dieAfter; }
+        public CoolDown(Avatar owner, float dieAfter) : base(owner) { _dieAfter = dieAfter; }
 
         public CapsuleState Update(Capsule c)
         {
-            if (Time.time > _dieAfter) return new Carried(_owner);
+            MoveCapsuleToOwner(c);
+
+            if (Time.time > _dieAfter) return new Carried(Owner);
             else return this;
         }
     }

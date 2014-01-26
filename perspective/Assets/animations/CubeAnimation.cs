@@ -43,6 +43,16 @@ public class CubeAnimation : MonoBehaviour {
 		}
     }
 
+    void animationEventTop()
+    {
+    	Debug.Log("block at top");
+    }
+
+    void animationEventBottom()
+    {
+    	Debug.Log("block at bottom");
+    }
+
     void OnTriggerEnter(Collider other)
     {
 	  	if (other.gameObject.name == "SphereCollider")

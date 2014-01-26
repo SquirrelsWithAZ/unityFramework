@@ -1,0 +1,128 @@
+fileFormatVersion: 2
+guid: 0118d3f94eaa049ce882d5e81507afbc
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ArmLeftDummy
+    100002: ArmLowerLeftBone
+    100004: ArmLowerRightBone
+    100006: ArmRightDummy
+    100008: ArmUpperLeftBone
+    100010: ArmUpperRightBone
+    100012: //RootNode
+    100014: ChestBone
+    100016: ChestBoneDummy
+    100018: ChestBoneNub
+    100020: Dummy002
+    100022: FootLeftBone
+    100024: FootLeftNubBone
+    100026: FootRightBone
+    100028: FootRightNubBone
+    100030: HandLeftBone
+    100032: HandLeftNubBone
+    100034: HandRightBone
+    100036: HandRightNubBone
+    100038: HeadBone
+    100040: HeadBoneNub
+    100042: HeadDummy
+    100044: LegLeftDummy
+    100046: LegLowerLeftBone
+    100048: LegLowerRightBone
+    100050: LegRightDummy
+    100052: LegUpperLeftBone
+    100054: LegUpperRightBone
+    100056: MainCharacter
+    100058: MainControlDummy
+    100060: SpineBone1
+    100062: SpineBone2
+    100064: WaistBone
+    400000: ArmLeftDummy
+    400002: ArmLowerLeftBone
+    400004: ArmLowerRightBone
+    400006: ArmRightDummy
+    400008: ArmUpperLeftBone
+    400010: ArmUpperRightBone
+    400012: //RootNode
+    400014: ChestBone
+    400016: ChestBoneDummy
+    400018: ChestBoneNub
+    400020: Dummy002
+    400022: FootLeftBone
+    400024: FootLeftNubBone
+    400026: FootRightBone
+    400028: FootRightNubBone
+    400030: HandLeftBone
+    400032: HandLeftNubBone
+    400034: HandRightBone
+    400036: HandRightNubBone
+    400038: HeadBone
+    400040: HeadBoneNub
+    400042: HeadDummy
+    400044: LegLeftDummy
+    400046: LegLowerLeftBone
+    400048: LegLowerRightBone
+    400050: LegRightDummy
+    400052: LegUpperLeftBone
+    400054: LegUpperRightBone
+    400056: MainCharacter
+    400058: MainControlDummy
+    400060: SpineBone1
+    400062: SpineBone2
+    400064: WaistBone
+    4300000: MainCharacter
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: MainCharacter
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

@@ -169,12 +169,7 @@ public class Grid : MonoBehaviour
             t.transform.position, 
             this.transform.rotation
           ) as GameObject;
-          if (player == null) throw new System.InvalidOperationException();
-          player.transform.localScale = new Vector3(
-            this.getTileWidth() * player.transform.localScale.x,
-            player.transform.localScale.y,
-            this.getTileHeight() * player.transform.localScale.z
-          );
+
 
           player.transform.parent = this.transform;
           playerNumber++;

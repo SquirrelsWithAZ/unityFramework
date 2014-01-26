@@ -13,6 +13,7 @@ public class SphereColliderAnimator : MonoBehaviour {
 
 	if (Input.GetKeyUp ("space")) {
 			animation.Play("sphereCollider", PlayMode.StopAll);
+			Game.instance.grid.swapTileVisuals();
 			Game.instance.grid.swapTileState();
 		}
 	}

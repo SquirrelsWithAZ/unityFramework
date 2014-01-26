@@ -18,7 +18,7 @@ public class Grid : MonoBehaviour
   private IDictionary<string, UnityEngine.Object> actors;
   private IDictionary<Type, List<Prop>> props;
   private GameObject[,] tiles;
-  private List<Avatar> players;
+  public List<Avatar> players { get; private set; }
 
   void Awake() 
   {
@@ -199,6 +199,26 @@ public class Grid : MonoBehaviour
     
   }
 
+  public void swapTileVisuals()
+  {
+    for(int i = 0; i < this.tileCountI; i++)
+    {
+      for(int j = 0; j < this.tileCountJ; j++)
+      {
+        GameObject tile = this.tiles[i, j];
+
+        bool multiModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") == null;
+        if(multiModel)
+        {
+          GameObject modelA = tile.transform.FindChild ("AnimationWrap").FindChild("Model_A").gameObject;
+          GameObject modelB = tile.transform.FindChild ("AnimationWrap").FindChild("Model_B").gameObject;
+          modelA.SetActive(!modelA.activeSelf);
+          modelB.SetActive(!modelB.activeSelf);
+        }
+      }
+    }
+  }
+
   public void swapTileState()
   {
     for(int i = 0; i < this.tileCountI; i++)
@@ -210,11 +230,6 @@ public class Grid : MonoBehaviour
         bool multiModel = tile.transform.FindChild("AnimationWrap").FindChild("Model") == null;
 		    if(multiModel)
         {
-          GameObject modelA = tile.transform.FindChild ("AnimationWrap").FindChild("Model_A").gameObject;
-          GameObject modelB = tile.transform.FindChild ("AnimationWrap").FindChild("Model_B").gameObject;
-          modelA.SetActive(!modelA.activeSelf);
-          modelB.SetActive(!modelB.activeSelf);
-		
           if(tile.layer == Tile.GetPhysicsLayerFromType(TileTypes.TypeA))
           {
             tile.layer = Tile.GetPhysicsLayerFromType(TileTypes.TypeB);

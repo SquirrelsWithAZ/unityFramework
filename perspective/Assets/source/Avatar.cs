@@ -67,7 +67,7 @@ public class Avatar : MonoBehaviour
     if(tile.gameObject.layer != this.gameObject.layer &&
       tile.gameObject.layer != Tile.GetPhysicsLayerFromType(TileTypes.Neutral))
     {
-      HarlemShake(65, 0.2f);
+      HarlemShake(65, this.unstableDurationS * 0.2f);
       this.unstableDurationS += Time.deltaTime;
 
       //play audio when stuck
@@ -79,6 +79,14 @@ public class Avatar : MonoBehaviour
         // DEATH!
         // TODO: spawn particle effect
         // TODO: sound
+        foreach (Prop p in Game.instance.grid.getProp(typeof(Capsule))) {
+          Capsule c = p as Capsule;
+          if (c.Owner == this)
+          {
+            c.Reset();
+          }
+        }
+
         transform.localPosition = _initialTransform;
         this.unstableDurationS = 0.0f;
         gameObject.SetActive(false);

@@ -30,7 +30,12 @@ public class Capsule : Prop {
         currentState = _state.GetType().Name;
     }
 
-    public void Reset() { _state = new Default(); }
+    public void Reset() 
+    {
+      transform.parent = _spawnTile;
+      transform.localPosition = _spawnPos;
+      _state = new Default(); 
+    }
 
     public Avatar Owner { get { return _state.GetOwner(this); } }
 
@@ -48,7 +53,7 @@ public class Capsule : Prop {
         public virtual CapsuleState Update(Capsule c)
         {
             foreach(Avatar a in Game.instance.grid.players) {
-                if ((a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity)
+                if (a.gameObject.activeInHierarchy && (a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity)
                 {
                     //play sound for grab
                     c.transform.parent = a.transform;
@@ -81,7 +86,11 @@ public class Capsule : Prop {
             MoveCapsuleToOwner(c);
 
             foreach(Avatar a in Game.instance.grid.players)
-                if (!System.Object.ReferenceEquals(Owner, a) && (a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity)
+                if (
+                    a.gameObject.activeInHierarchy && 
+                    !System.Object.ReferenceEquals(Owner, a) && 
+                    (a.transform.position - c.transform.position).ClearY().magnitude <= c.pickupProximity
+                )
                 {
                     c.transform.parent = a.transform;
 
@@ -101,8 +110,8 @@ public class Capsule : Prop {
                     (spawnProp.player == "PlayerB" && Owner.currentType == TileTypes.TypeA)
                   )
                   {
-                      c.Score(Owner);
-                      return new Default();
+                    c.Score(Owner);
+                    return new Default();
                   }
               }
             }   

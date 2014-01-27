@@ -87,9 +87,18 @@ public class Avatar : MonoBehaviour
           }
         }
 
+        _currentVelocity = Vector3.zero;
+        _targetVelocity = Vector3.zero;
+        _velocityDir = VelocityDir.Static;
+        _compedVelocity = false;
+        _lockOutDirectionChange = false;
+
         transform.localPosition = _initialTransform;
         this.unstableDurationS = 0.0f;
         gameObject.SetActive(false);
+
+        GridPos gridp = transform.position.GetGridPos();
+        _occupiedTile = Game.instance.grid.getTile(gridp.x, gridp.y);
 
         Game.instance.setTimeout(
           Time.time + Game.instance.timeDead,

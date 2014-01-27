@@ -143,5 +143,8 @@ public class Capsule : Prop {
       transform.localPosition = _spawnPos;
 
       Game.instance.scoreManager.AdjustPlayerScore(Owner.currentType, 1);
+
+      foreach (Avatar player in Game.instance.grid.players)
+        player.ResetAvatar();
     }
 }

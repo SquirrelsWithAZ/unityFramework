@@ -76,30 +76,9 @@ public class Avatar : MonoBehaviour
       //this.Play();
       if (this.unstableDurationS > Game.instance.maxTimeTwerking)
       {
-        // DEATH!
-        // TODO: spawn particle effect
-        // TODO: sound
-        foreach (Prop p in Game.instance.grid.getProp(typeof(Capsule))) {
-          Capsule c = p as Capsule;
-          if (c.Owner == this)
-          {
-            c.Reset();
-          }
-        }
+        ResetAvatar();
 
-        _currentVelocity = Vector3.zero;
-        _targetVelocity = Vector3.zero;
-        _velocityDir = VelocityDir.Static;
-        _compedVelocity = false;
-        _lockOutDirectionChange = false;
-
-        transform.localPosition = _initialTransform;
-        this.unstableDurationS = 0.0f;
         gameObject.SetActive(false);
-
-        GridPos gridp = transform.position.GetGridPos();
-        _occupiedTile = Game.instance.grid.getTile(gridp.x, gridp.y);
-
         Game.instance.setTimeout(
           Time.time + Game.instance.timeDead,
           () => { gameObject.SetActive(true); }
@@ -131,6 +110,33 @@ public class Avatar : MonoBehaviour
               this.transform.rotation = newRotation;
       }
     }
+  }
+
+  public void ResetAvatar()
+  {
+    // DEATH!
+    // TODO: spawn particle effect
+    // TODO: sound
+    foreach (Prop p in Game.instance.grid.getProp(typeof(Capsule)))
+    {
+      Capsule c = p as Capsule;
+      if (c.Owner == this)
+      {
+        c.Reset();
+      }
+    }
+
+    _currentVelocity = Vector3.zero;
+    _targetVelocity = Vector3.zero;
+    _velocityDir = VelocityDir.Static;
+    _compedVelocity = false;
+    _lockOutDirectionChange = false;
+
+    transform.localPosition = _initialTransform;
+    this.unstableDurationS = 0.0f;
+
+    GridPos gridp = transform.position.GetGridPos();
+    _occupiedTile = Game.instance.grid.getTile(gridp.x, gridp.y);
   }
 
   public void HarlemShake(float intensity, float range)

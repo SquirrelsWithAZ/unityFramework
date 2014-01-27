@@ -23,10 +23,11 @@ public class CubeAnimation : MonoBehaviour {
 		//1/26/14: Elijah Tate
 		
 		//this.transform.eulerAngles = new Vector3(rollSpeed * tiltX, 0, rollSpeed * tiltZ);
-		this.transform.Rotate(new Vector3(rollSpeed * tiltX, 0, rollSpeed * tiltZ));
+		//this.transform.Rotate(new Vector3(rollSpeed * tiltX, 0, rollSpeed * tiltZ));
 
  		if (Input.GetKeyUp ("4")) 
  		{
+ 			rollSpeed = 0.1f;
  			//Debug.Log("hit 4");
 	
 			//total grid size

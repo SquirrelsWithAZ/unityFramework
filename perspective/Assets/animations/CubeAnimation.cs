@@ -131,15 +131,15 @@ public class CubeAnimation : MonoBehaviour {
 				if (moveUp)
 					animation.Play("cubeTypeAFlip", PlayMode.StopAll);
 				else
-          animation.Play("cubeTypeBFlip", PlayMode.StopAll);	
+          			animation.Play("cubeTypeBFlip", PlayMode.StopAll);	
 			}
 
 			if (this.transform.parent.gameObject.name == "Tile_Type_B(Clone)")
 			{
 				if (moveUp)
-          animation.Play("cubeTypeBFlip", PlayMode.StopAll);
+          			animation.Play("cubeTypeBFlip", PlayMode.StopAll);
 				else
-          animation.Play("cubeTypeAFlip", PlayMode.StopAll);	
+          			animation.Play("cubeTypeAFlip", PlayMode.StopAll);	
 			}
 
 			moveUp = !moveUp;

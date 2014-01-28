@@ -129,17 +129,17 @@ public class CubeAnimation : MonoBehaviour {
     		if (this.transform.parent.gameObject.name == "Tile_Type_A(Clone)")
 			{
 				if (moveUp)
-					animation.Play("cubeSink", PlayMode.StopAll);
+					animation.Play("cubeTypeAFlip", PlayMode.StopAll);
 				else
-					animation.Play("cubeRise", PlayMode.StopAll);	
+          animation.Play("cubeTypeBFlip", PlayMode.StopAll);	
 			}
 
 			if (this.transform.parent.gameObject.name == "Tile_Type_B(Clone)")
 			{
 				if (moveUp)
-					animation.Play("cubeRise", PlayMode.StopAll);
+          animation.Play("cubeTypeBFlip", PlayMode.StopAll);
 				else
-					animation.Play("cubeSink", PlayMode.StopAll);	
+          animation.Play("cubeTypeAFlip", PlayMode.StopAll);	
 			}
 
 			moveUp = !moveUp;
